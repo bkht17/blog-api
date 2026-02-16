@@ -73,6 +73,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "apps.blog.pagination.DefaultPagination",
+    "PAGE_SIZE": 10,
+}
+
 AUTH_USER_MODEL = 'users.User'
 
 LANGUAGE_CODE = 'en-us'
