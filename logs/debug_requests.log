@@ -1,0 +1,6 @@
+2026-02-16 13:32:15,440 DEBUG debug_requests middleware REQUEST GET / ip=127.0.0.1
+2026-02-16 13:32:20,787 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-02-16 13:32:29,095 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-02-16 13:32:29,892 DEBUG debug_requests middleware REQUEST GET /api/auth/token/ ip=127.0.0.1
+2026-02-16 13:32:39,548 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-02-16 13:35:36,682 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1

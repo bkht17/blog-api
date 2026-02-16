@@ -1,0 +1,50 @@
+erDiagram
+    USER ||--o{ POST: writes
+    USER ||--o{ COMMENT: writes
+    CATEGORY ||--o{ POST: categorizes
+    POST ||--o{ COMMENT: has
+    POST }o--o{ TAG: tagged_with
+
+
+    USER{
+        int id PK
+        string email "unique, login field"
+        string first_name
+        string last_name
+        bool is_active
+        bool is_staff
+        datetime date_joined
+        string avatar "optional"
+    }
+
+    CATEGORY{
+        int id PK
+        string name "unique"
+        string slug "unique"
+    }
+
+    TAG{
+        int id PK
+        string name "unique"
+        string slug "unique"
+    }
+
+    POST{
+        int id PK
+        int author_id FK 
+        string title
+        string slug "unique"
+        text body
+        int category_id FK "nullable (SET_NULL)"
+        string status "draft|published"
+        datetime created_at
+        datetime updated_at
+    }
+
+    COMMENT{
+        int id PK
+        int post_id FK 
+        int author_id FK 
+        text body
+        datetime created_at
+    }
