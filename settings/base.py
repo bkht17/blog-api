@@ -76,6 +76,9 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "apps.blog.pagination.DefaultPagination",
     "PAGE_SIZE": 10,
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 AUTH_USER_MODEL = 'users.User'
