@@ -5,6 +5,7 @@ from .conf import *
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True, parents=True)
+REDIS_URL = REDIS_URL
 
 SECRET_KEY = SECRET_KEY
 DEBUG = DEBUG
