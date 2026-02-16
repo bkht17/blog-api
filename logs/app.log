@@ -1,0 +1,297 @@
+2026-02-16 13:32:15,462 WARNING django.request log Not Found: /
+2026-02-16 13:32:20,804 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 169, in get_usage
+    if not _method_match(request, method):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 93, in _method_match
+    return request.method in [m.upper() for m in method]
+           ^^^^^^^^^^^^^^
+AttributeError: 'LoggingTokenObtainPairView' object has no attribute 'method'
+2026-02-16 13:32:29,122 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 169, in get_usage
+    if not _method_match(request, method):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 93, in _method_match
+    return request.method in [m.upper() for m in method]
+           ^^^^^^^^^^^^^^
+AttributeError: 'LoggingTokenObtainPairView' object has no attribute 'method'
+2026-02-16 13:32:29,923 WARNING django.request log Method Not Allowed: /api/auth/token/
+2026-02-16 13:32:39,588 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 169, in get_usage
+    if not _method_match(request, method):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 93, in _method_match
+    return request.method in [m.upper() for m in method]
+           ^^^^^^^^^^^^^^
+AttributeError: 'LoggingTokenObtainPairView' object has no attribute 'method'
+2026-02-16 13:35:36,709 ERROR users views Error occurred during login for email: test@example.com
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: users_user
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/users/views.py", line 47, in post
+    response = super().post(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 54, in validate
+    self.user = authenticate(**authenticate_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/__init__.py", line 114, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/backends.py", line 65, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 37, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: users_user
+2026-02-16 13:35:36,752 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such table: users_user
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 27, in _wrapped
+    return fn(request, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/users/views.py", line 47, in post
+    response = super().post(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 54, in validate
+    self.user = authenticate(**authenticate_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/views/decorators/debug.py", line 75, in sensitive_variables_wrapper
+    return func(*func_args, **func_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/__init__.py", line 114, in authenticate
+    user = backend.authenticate(request, **credentials)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/backends.py", line 65, in authenticate
+    user = UserModel._default_manager.get_by_natural_key(username)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/contrib/auth/base_user.py", line 37, in get_by_natural_key
+    return self.get(**{self.model.USERNAME_FIELD: username})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 631, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 368, in __len__
+    self._fetch_all()
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 1954, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/query.py", line 93, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/models/sql/compiler.py", line 1623, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 122, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 79, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 92, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 100, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/utils.py", line 105, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/.venv/lib/python3.11/site-packages/django/db/backends/sqlite3/base.py", line 360, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.OperationalError: no such table: users_user

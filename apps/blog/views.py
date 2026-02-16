@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.db.models import QuerySet
 from django.core.cache import cache
+from django_ratelimit.decorators import ratelimit
+from django.utils.decorators import method_decorator
 
 from .constants import PUBLISHED_POSTS_LIST_CACHE_KEY, PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS
 from .models import *
@@ -93,3 +95,7 @@ class PostViewSet(viewsets.ModelViewSet):
         data = self.get_paginated_response(serializer.data).data
         cache.set(PUBLISHED_POSTS_LIST_CACHE_KEY, data, timeout=PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS)
         return Response(data)
+    
+    @method_decorator(ratelimit(key='ip', rate='20/m', block=True, method='POST'))
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)

@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django_ratelimit.decorators import ratelimit
+from django.utils.decorators import method_decorator
 
 from .serializers import UserSerializer, RegisterSerializer
 
@@ -14,6 +16,7 @@ logger = logging.getLogger("users")
 class RegisterViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     
+    @method_decorator(ratelimit(key='ip', rate='5/m', block=True, method='POST'))  
     def create(self, request):
         logger.info("Registration attempt for email: %s", request.data.get("email"))
         serializer = RegisterSerializer(data=request.data)
@@ -36,6 +39,7 @@ class RegisterViewSet(viewsets.ViewSet):
         }, status=status.HTTP_201_CREATED)
         
 class LoggingTokenObtainPairView(TokenObtainPairView):
+    @method_decorator(ratelimit(key='ip', rate='10/m', block=True, method='POST'))
     def post(self, request, *args, **kwargs):
         logger.info("Login attempt for email: %s", request.data.get("email"))
         
