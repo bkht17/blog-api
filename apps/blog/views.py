@@ -11,6 +11,7 @@ from .models import *
 from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
 from .pagination import DefaultPagination
+from .redis_pubsub import publist_comment_created
 
 import logging
 
@@ -78,6 +79,17 @@ class PostViewSet(viewsets.ModelViewSet):
         except Exception:
             logger.exception("Error occurred while creating comment: post_slug=%s by user: %s", post.slug, request.user.id)
             raise
+        
+        publish_comment_created({
+            "event": "comment_created",
+            "comment_id": comment.id,
+            "post_id": comment.post_id,
+            "post_slug": post.slug,
+            "author_id": comment.author_id,
+            "created_at": comment.created_at.isoformat(),
+            "body": comment.body,
+        })
+        logger.info("Published comment_created event to redis: comment_id=%s", comment.id)
         
         logger.info("Comment created successfully: id=%s post_id=%s author_id=%s", comment.id, comment.post_id, comment.author_id)
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)

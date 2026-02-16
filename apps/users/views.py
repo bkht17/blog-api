@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
 
+
 from .serializers import UserSerializer, RegisterSerializer
 
 import logging
