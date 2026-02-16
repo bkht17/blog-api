@@ -3,6 +3,8 @@ from pathlib import Path
 from .conf import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+LOG_DIR = BASE_DIR / 'logs'
+LOG_DIR.mkdir(exist_ok=True, parents=True)
 
 SECRET_KEY = SECRET_KEY
 DEBUG = DEBUG
@@ -28,6 +30,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'settings.middleware.DebugRequestLoggingMiddleware',
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -82,6 +85,70 @@ REST_FRAMEWORK = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        }
+    },
+    'formatters':{
+        'simple':{
+            'format': '%(levelname)s %(message)s',
+        },
+        'verbose':{
+            'format': '%(asctime)s %(levelname)s %(name)s %(module)s %(message)s',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file':{
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename':str(LOG_DIR / 'app.log'),
+            'formatter': 'verbose',
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+        },
+        'debug_requests_file':{
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': str(LOG_DIR / 'debug_requests.log'),
+            'formatter': 'verbose',
+            'filters': ['require_debug_true'],
+            'maxBytes': 1024*1024*5,
+            'backupCount': 5,
+        },
+    },
+    'loggers':{
+        'users':{
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'blog':{
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'django.request':{
+            'handlers': ['file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+        'debug_requests':{
+            'handlers': ['debug_requests_file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    }
+}
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'

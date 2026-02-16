@@ -8,6 +8,10 @@ from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
 from .pagination import DefaultPagination
 
+import logging
+
+logger = logging.getLogger("blog")
+
 # Create your views here.
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
@@ -25,8 +29,21 @@ class PostViewSet(viewsets.ModelViewSet):
             return qs.filter(status='published')
         return qs
 
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+    def perform_create(self, serializer: PostSerializer) -> None:
+        logger.info("Post create attempt by user: %s", self.request.user.id)
+        post = serializer.save(author=self.request.user)
+        logger.info("Post created successfully: id=%s, slug=%s, author_id=%s", post.id, post.slug, post.author_id)
+        
+    def perform_update(self, serializer: PostSerializer) -> None:
+        post = self.get_object()
+        logger.info("Post update attempt: id=%s slug=%s by user: %s", post.id, post.slug, self.request.user.id)
+        serializer.save()
+        logger.info("Post updated successfully: id=%s slug=%s", post.id, post.slug)
+        
+    def perform_destroy(self, instance: Post) -> None:
+        logger.info("Post delete attempt: id=%s slug=%s by user: %s", instance.id, instance.slug, self.request.user.id)
+        instance.delete()
+        logger.info("Post deleted successfully: id=%s slug=%s", instance.id, instance.slug)
         
     @action(detail=True, methods=['get', 'post'], url_path='comments')
     def comments(self, request, slug=None):
@@ -38,15 +55,23 @@ class PostViewSet(viewsets.ModelViewSet):
             return self.get_paginated_response(serializer.data)
         
         #POST
+        logger.info("Comments create attempt: post_slug=%s by user: %s", post.slug, request.user.id)
+        
         if not request.user.is_authenticated:
             return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
                 
         serializer = CommentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        comment = Comment.objects.create(
-            post=post,
-            author=request.user,
-            body=serializer.validated_data['body']
-        )
+        try:
+            comment = Comment.objects.create(
+                post=post,
+                author=request.user,
+                body=serializer.validated_data['body']
+            )
+        except Exception:
+            logger.exception("Error occurred while creating comment: post_slug=%s by user: %s", post.slug, request.user.id)
+            raise
+        
+        logger.info("Comment created successfully: id=%s post_id=%s author_id=%s", comment.id, comment.post_id, comment.author_id)
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
