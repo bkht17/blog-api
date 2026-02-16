@@ -1,8 +1,10 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
+from rest_framework.decorators import action
 from django.db.models import QuerySet
 
-from .models import Post
-from .serializers import PostSerializer
+from .models import *
+from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
 from .pagination import DefaultPagination
 
@@ -25,3 +27,26 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+        
+    @action(detail=True, methods=['get', 'post'], url_path='comments')
+    def comments(self, request, slug=None):
+        post = self.get_object()
+        if request.method == 'GET':
+            qs = Comment.objects.filter(post=post).select_related('author').order_by('-created_at')
+            page = self.paginate_queryset(qs)
+            serializer = CommentSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+        
+        #POST
+        if not request.user.is_authenticated:
+            return Response({"detail": "Authentication credentials were not provided."}, status=status.HTTP_401_UNAUTHORIZED)
+                
+        serializer = CommentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        comment = Comment.objects.create(
+            post=post,
+            author=request.user,
+            body=serializer.validated_data['body']
+        )
+        return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
