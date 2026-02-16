@@ -2,7 +2,9 @@ from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.db.models import QuerySet
+from django.core.cache import cache
 
+from .constants import PUBLISHED_POSTS_LIST_CACHE_KEY, PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS
 from .models import *
 from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
@@ -32,12 +34,14 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer: PostSerializer) -> None:
         logger.info("Post create attempt by user: %s", self.request.user.id)
         post = serializer.save(author=self.request.user)
+        cache.delete(PUBLISHED_POSTS_LIST_CACHE_KEY)
         logger.info("Post created successfully: id=%s, slug=%s, author_id=%s", post.id, post.slug, post.author_id)
         
     def perform_update(self, serializer: PostSerializer) -> None:
         post = self.get_object()
         logger.info("Post update attempt: id=%s slug=%s by user: %s", post.id, post.slug, self.request.user.id)
         serializer.save()
+        cache.delete(PUBLISHED_POSTS_LIST_CACHE_KEY)
         logger.info("Post updated successfully: id=%s slug=%s", post.id, post.slug)
         
     def perform_destroy(self, instance: Post) -> None:
@@ -75,3 +79,17 @@ class PostViewSet(viewsets.ModelViewSet):
         
         logger.info("Comment created successfully: id=%s post_id=%s author_id=%s", comment.id, comment.post_id, comment.author_id)
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+    
+    def list(self, request, *args, **kwargs):
+        cached_data = cache.get(PUBLISHED_POSTS_LIST_CACHE_KEY)
+        if cached_data is not None:
+            logger.debug("Cache hit for published posts list")
+            return Response(cached_data)
+        
+        queryset = self.filter_queryset(self.get_queryset())
+        
+        page = self.paginate_queryset
+        serializer = self.get_serializer(page, many=True)
+        data = self.get_paginated_response(serializer.data).data
+        cache.set(PUBLISHED_POSTS_LIST_CACHE_KEY, data, timeout=PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS)
+        return Response(data)
