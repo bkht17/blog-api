@@ -2,7 +2,7 @@ from pathlib import Path
 
 from .conf import *
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True, parents=True)
 REDIS_URL = REDIS_URL
@@ -109,16 +109,6 @@ SPECTACULAR_SETTINGS = {
     # Other settings can be added here
 }
 
-LANGUAGE_CODE = 'en'
-
-LANGUAGES = [
-    ('en', 'English'),
-    ('ru', 'Russian'),
-    ('kk', 'Kazakh'),
-]
-
-USE_I18N = True
-
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
 AUTH_USER_MODEL = 'users.User'
@@ -187,9 +177,16 @@ LOGGING = {
     }
 }
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Russian'),
+    ('kk', 'Kazakh'),
+]
+
 USE_I18N = True
+TIME_ZONE = 'UTC'
 USE_TZ = True
 
 STATIC_URL = 'static/'
