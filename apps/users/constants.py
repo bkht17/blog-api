@@ -2,14 +2,14 @@ from django.utils.translation import gettext_lazy as _
 
 LANGUAGE_EN = 'en'
 LANGUAGE_RU = 'ru'
-LANGUAGE_KZ = 'kz'
+LANGUAGE_KK = 'kk'
 
 SUPPORTED_LANGUAGES_CHOICES = [
     (LANGUAGE_EN, _('English')),
     (LANGUAGE_RU, _('Russian')),
-    (LANGUAGE_KZ, _('Kazakh')),
+    (LANGUAGE_KK, _('Kazakh')),
 ]
 
-SUPPORTED_LANGUAGES_CODES = [LANGUAGE_EN, LANGUAGE_RU, LANGUAGE_KZ]
+SUPPORTED_LANGUAGES_CODES = [LANGUAGE_EN, LANGUAGE_RU, LANGUAGE_KK]
 
 DEFAULT_TIMEZONE = 'UTC'
