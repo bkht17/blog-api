@@ -28,12 +28,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'settings.middleware.DebugRequestLoggingMiddleware',
+    'apps.core.middleware.LanguageTimezoneMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -107,6 +109,17 @@ SPECTACULAR_SETTINGS = {
     # Other settings can be added here
 }
 
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Russian'),
+    ('kk', 'Kazakh'),
+]
+
+USE_I18N = True
+
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
 AUTH_USER_MODEL = 'users.User'
 
