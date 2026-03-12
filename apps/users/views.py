@@ -2,12 +2,15 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework_simplejwt.views import TokenObtainPairView
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from django.utils.translation import gettext_lazy as _
+from drf_spectacular.utils import OpenApiParameter, extend_schema, OpenApiExample, OpenApiResponse
 
-
-from .serializers import UserSerializer, RegisterSerializer
+from .serializers import UserSerializer, RegisterSerializer, UserLanguageSerializer, UserTimezoneSerializer
 
 import logging
 
@@ -17,6 +20,57 @@ logger = logging.getLogger("users")
 class RegisterViewSet(viewsets.ViewSet):
     permission_classes = [AllowAny]
     
+    @extend_schema(
+        summary="User Registration",
+        description="Allows new users to register by providing their email, first name, last name, and password.",
+        request=RegisterSerializer,
+        responses={
+            201: OpenApiResponse(
+                description="User registered successfully.",
+            ),
+            400: OpenApiResponse(
+                description="Invalid input data.",
+            ),
+            401: OpenApiResponse(
+                description="Authentication credentials were not provided or are invalid.",
+            )
+        },
+        examples=[
+            OpenApiExample(
+                "User Registration",
+                value={
+                    "email": "user@example.com",
+                    "first_name": "John",
+                    "last_name": "Doe",
+                    "password": "securepassword",
+                    "password2": "securepassword",
+                    "preferred_language": "en",
+                    "timezone": "UTC"
+                },
+                request_only=True,
+            ),
+            OpenApiExample(
+                "Register response example",
+                value={
+                    "user": {
+                        "id": 1,
+                        "email": "user@example.com",
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "preferred_language": "en",
+                        "timezone": "UTC"
+                    },
+                    "tokens": {
+                        "refresh": "refresh_token",
+                        "access": "access_token"
+                    }
+                },
+                response_only=True,
+                status_codes=[201]
+            )
+        ],
+        tags=["Auth"]
+    )
     @method_decorator(ratelimit(key='ip', rate='5/m', block=True, method='POST'))  
     def create(self, request):
         logger.info("Registration attempt for email: %s", request.data.get("email"))
@@ -55,3 +109,95 @@ class LoggingTokenObtainPairView(TokenObtainPairView):
         else:
             logger.warning("Login failed for email: %s status=%s", request.data.get("email"), response.status_code)
         return response
+    
+class UserPreferenceViewSet(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+    
+    def get_permissions(self):
+        return [permission() for permission in self.permission_classes]
+    
+    @extend_schema(
+        summary="Update Preferred Language",
+        description="Allows authenticated users to update their preferred language.",
+        request=UserLanguageSerializer,
+        responses={
+            200: OpenApiResponse(
+                description="Preferred language updated successfully.",
+            ),
+            400: OpenApiResponse(
+                description="Invalid input data.",
+            ),
+            401: OpenApiResponse(
+                description="Authentication credentials were not provided or are invalid.",
+            ),
+        },
+        examples=[
+            OpenApiExample(
+                "Update Preferred Language",
+                value={"preferred_language": "en"},
+                request_only=True,
+            ),
+        ],
+        tags=["Auth"]
+    )
+    @action(
+        detail=False,
+        methods=['patch'],
+        url_path='language',
+    )
+    def language(self, request):
+        serializer = UserLanguageSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.preferred_language = serializer.validated_data['preferred_language']
+        request.user.save(update_fields=['preferred_language'])
+        
+        return Response(
+            {
+                "detail": _("Preferred language updated successfully."),
+                "preferred_language": request.user.preferred_language,
+            },
+            status=status.HTTP_200_OK
+        )
+    
+    @extend_schema(
+        summary="Update Timezone",
+        description="Allows authenticated users to update their timezone.",
+        request=UserTimezoneSerializer,
+        responses={
+            200: OpenApiResponse(
+                description="Timezone updated successfully.",
+            ),
+            400: OpenApiResponse(
+                description="Invalid input data.",
+            ),
+            401: OpenApiResponse(
+                description="Authentication credentials were not provided or are invalid.",
+            ),
+        },
+        examples=[
+            OpenApiExample(
+                "Update Timezone",
+                value={"timezone": "UTC"},
+                request_only=True,
+            ),
+        ],
+        tags=["Auth"]
+    )
+    @action(
+        detail=False,
+        methods=['patch'],
+        url_path='timezone',
+    )
+    def timezone(self, request):
+        serializer = UserTimezoneSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        request.user.timezone = serializer.validated_data['timezone']
+        request.user.save(update_fields=['timezone'])
+        
+        return Response(
+            {
+                "detail": _("Timezone updated successfully."),
+                "timezone": request.user.timezone,
+            },
+            status=status.HTTP_200_OK
+        )

@@ -1,12 +1,15 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
+from .constants import SUPPORTED_LANGUAGES_CODES
+from django.utils.translation import gettext_lazy as _
+from zoneinfo import available_timezones
 
 User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'first_name', 'last_name', 'avatar', 'date_joined']
+        fields = ['id', 'email', 'first_name', 'last_name', 'avatar', 'date_joined', 'preferred_language', 'timezone']
         
 class RegisterSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
@@ -27,3 +30,16 @@ class RegisterSerializer(serializers.Serializer):
         validated_data.pop("password2")
         password = validated_data.pop("password")
         return User.objects.create_user(password=password, **validated_data)
+    
+class UserLanguageSerializer(serializers.Serializer):
+    preferred_language = serializers.ChoiceField(
+        choices=sorted(SUPPORTED_LANGUAGES_CODES),
+    )
+    
+class UserTimezoneSerializer(serializers.Serializer):
+    timezone = serializers.CharField(max_length=64)
+    
+    def validate_timezone(self, value: str) -> str:
+        if value not in available_timezones():
+            raise serializers.ValidationError(_("Invalid timezone."))
+        return value
