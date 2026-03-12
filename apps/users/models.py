@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.db import models
+from django.utils.translation import gettext_lazy as _
+from .constants import SUPPORTED_LANGUAGES_CHOICES, DEFAULT_TIMEZONE, LANGUAGE_EN
 
 class UserManager(BaseUserManager["User"]):
     def create_user(self, email: str , password: str | None=None, **extra_fields: object) -> "User":
@@ -39,11 +41,25 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    preferred_language = models.CharField(
+        max_length=2,
+        choices=SUPPORTED_LANGUAGES_CHOICES,
+        default=LANGUAGE_EN,
+        verbose_name=_('Preferred Language')
+    )
+    
+    timezone = models.CharField(
+        max_length=64,
+        default=DEFAULT_TIMEZONE,
+        verbose_name=_('Timezone')
+    )
     
     objects = UserManager()
     
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS: list[str] = ["first_name", "last_name"]
+    
+    
     
     def __str__(self) -> str:
         return self.email
