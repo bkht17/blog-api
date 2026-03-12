@@ -295,3 +295,26 @@ Traceback (most recent call last):
     return super().execute(query, params)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 django.db.utils.OperationalError: no such table: users_user
+2026-03-12 18:31:57,089 ERROR users views Error occurred during login for email: user@example.com
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/users/views.py", line 102, in post
+    response = super().post(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 57, in validate
+    raise exceptions.AuthenticationFailed(
+rest_framework.exceptions.AuthenticationFailed: No active account found with the given credentials
+2026-03-12 18:31:57,093 WARNING django.request log Unauthorized: /api/auth/token/
+2026-03-12 18:36:13,601 WARNING django.request log Bad Request: /api/auth/timezone/
+2026-03-12 18:38:16,937 WARNING django.request log Unauthorized: /api/posts/
+2026-03-12 18:38:19,691 WARNING django.request log Bad Request: /api/auth/timezone/

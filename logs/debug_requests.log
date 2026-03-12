@@ -4,3 +4,17 @@
 2026-02-16 13:32:29,892 DEBUG debug_requests middleware REQUEST GET /api/auth/token/ ip=127.0.0.1
 2026-02-16 13:32:39,548 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
 2026-02-16 13:35:36,682 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-12 18:31:37,618 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
+2026-03-12 18:31:38,143 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1
+2026-03-12 18:31:56,818 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-12 18:32:12,046 DEBUG debug_requests middleware REQUEST POST /api/auth/register/ ip=127.0.0.1
+2026-03-12 18:34:40,168 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
+2026-03-12 18:34:40,698 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1
+2026-03-12 18:34:56,852 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-12 18:35:55,849 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-12 18:36:13,549 DEBUG debug_requests middleware REQUEST PATCH /api/auth/timezone/?lang=ru ip=127.0.0.1
+2026-03-12 18:36:25,230 DEBUG debug_requests middleware REQUEST PATCH /api/auth/timezone/?lang=ru ip=127.0.0.1
+2026-03-12 18:38:05,353 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-12 18:38:16,826 DEBUG debug_requests middleware REQUEST GET /api/posts/?lang=kk ip=127.0.0.1
+2026-03-12 18:38:19,632 DEBUG debug_requests middleware REQUEST PATCH /api/auth/timezone/?lang=kk ip=127.0.0.1
+2026-03-12 18:38:24,120 DEBUG debug_requests middleware REQUEST PATCH /api/auth/timezone/?lang=kk ip=127.0.0.1
