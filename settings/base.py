@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.users',
     'apps.blog',
+    'apps.core',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,17 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     "EXCEPTION_HANDLER": "settings.drf.custom_exception_handler",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Blog API',
+    'DESCRIPTION': 'Homework 2 Blog API',
+    'VERSION': '2.0.0',
+    'SERVE_INCLUDE_SCHEMA': False, # Recommended for production
+    # Other settings can be added here
+}
+
 
 AUTH_USER_MODEL = 'users.User'
 
