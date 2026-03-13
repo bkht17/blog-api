@@ -19,6 +19,19 @@ class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField(write_only=True, required=True, min_length=8)
     password2 = serializers.CharField(write_only=True, required=True, min_length=8)
     
+    preferred_language = serializers.ChoiceField(
+        choices=sorted(SUPPORTED_LANGUAGE_CODES),
+        default="en",
+        required=False,
+    )
+    
+    timezone = serializers.CharField(max_length=64, default="UTC", required=False)
+    
+    def validate_timezone(self, value: str) -> str:
+        if value not in available_timezones():
+            raise serializers.ValidationError(_("Invalid timezone."))
+        return value
+    
     def validate(self, attrs):
         password = attrs.get('password')
         password2 = attrs.get('password2')

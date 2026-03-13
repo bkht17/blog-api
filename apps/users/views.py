@@ -11,6 +11,7 @@ from django.utils.translation import gettext_lazy as _
 from drf_spectacular.utils import OpenApiParameter, extend_schema, OpenApiExample, OpenApiResponse
 
 from .serializers import UserSerializer, RegisterSerializer, UserLanguageSerializer, UserTimezoneSerializer
+from .emails import send_welcome_email
 
 import logging
 
@@ -78,6 +79,7 @@ class RegisterViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         try:
             user = serializer.save()
+            send_welcome_email(user)
         except Exception:
             logger.exception("Error occurred during registration for email: %s", request.data.get("email"))
             raise

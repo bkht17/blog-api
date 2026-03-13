@@ -1,0 +1,8 @@
+Hello {{first_name}} {{last_name}}!
+
+Welcome to Blog API! We are glad you joined us.
+
+Your account has been created with email: {{email}}.
+
+Best regards,
+Blog API Team
