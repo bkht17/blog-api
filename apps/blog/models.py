@@ -1,21 +1,25 @@
 from django.db import models
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
+
 
 # Create your models here.
 class PostStatus(models.TextChoices):
     DRAFT = 'draft', 'Draft'
     PUBLISHED = 'published', 'Published'
 
-
 class Category(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(unique=True)
+    name_en = models.CharField(max_length=100, unique=True, default="" ,verbose_name=_("english name"))
+    name_ru = models.CharField(max_length=100, unique=True, default="" ,verbose_name=_("russian name"))
+    name_kk = models.CharField(max_length=100, unique=True, default="" ,verbose_name=_("kazakh name"))
+    slug = models.SlugField(unique=True, verbose_name=_("slug"))
     
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
     
-    def __str__(self):
-        return self.name
+    def __str__(self) -> str:
+        return self.name_en
     
 class Tag(models.Model):
     name = models.CharField(max_length=50, unique=True)
