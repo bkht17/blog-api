@@ -2,6 +2,11 @@ from django.db import models
 from django.conf import settings
 
 # Create your models here.
+class PostStatus(models.TextChoices):
+    DRAFT = 'draft', 'Draft'
+    PUBLISHED = 'published', 'Published'
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(unique=True)
@@ -26,7 +31,7 @@ class Post(models.Model):
     body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank = True, related_name='posts')
     tags = models.ManyToManyField(Tag, blank=True, related_name='posts')
-    status = models.CharField(max_length=10, choices=[('draft', 'Draft'), ('published', 'Published')], default='draft')
+    status = models.CharField(max_length=20, choices=PostStatus.choices, default=PostStatus.DRAFT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
