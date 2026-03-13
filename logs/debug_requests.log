@@ -277,3 +277,6 @@
 2026-03-13 14:34:28,838 DEBUG debug_requests middleware REQUEST GET /admin/jsi18n/ ip=127.0.0.1
 2026-03-13 14:34:34,916 DEBUG debug_requests middleware REQUEST GET /admin/blog/tag/ ip=127.0.0.1
 2026-03-13 14:34:35,253 DEBUG debug_requests middleware REQUEST GET /admin/jsi18n/ ip=127.0.0.1
+2026-03-13 14:48:34,924 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
+2026-03-13 14:48:35,505 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1
+2026-03-13 14:48:42,423 DEBUG debug_requests middleware REQUEST POST /api/auth/register/ ip=127.0.0.1

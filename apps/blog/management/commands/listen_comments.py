@@ -13,6 +13,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         asyncio.run(self._listen())
     
+    # async is used here because Redis pub/sub is pure I/O — we need to
+    # listen indefinitely without blocking the process. A sync version
+    # would require threads; asyncio handles this natively.
     async def _listen(self):
         url = urlparse(settings.REDIS_URL)
         db = int((url.path or "/0").lstrip("/"))
