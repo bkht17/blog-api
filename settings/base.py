@@ -2,7 +2,7 @@ from pathlib import Path
 
 from .conf import *
 
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / 'logs'
 LOG_DIR.mkdir(exist_ok=True, parents=True)
 REDIS_URL = REDIS_URL
@@ -21,17 +21,21 @@ INSTALLED_APPS = [
     'rest_framework',
     'apps.users',
     'apps.blog',
+    'apps.core',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'settings.middleware.DebugRequestLoggingMiddleware',
+    'apps.core.middleware.LanguageTimezoneMiddleware'
 ]
 
 ROOT_URLCONF = 'settings.urls'
@@ -39,7 +43,7 @@ ROOT_URLCONF = 'settings.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -94,7 +98,18 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     "EXCEPTION_HANDLER": "settings.drf.custom_exception_handler",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Blog API',
+    'DESCRIPTION': 'Homework 2 Blog API',
+    'VERSION': '2.0.0',
+    'SERVE_INCLUDE_SCHEMA': False, # Recommended for production
+    # Other settings can be added here
+}
+
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
 AUTH_USER_MODEL = 'users.User'
 
@@ -162,11 +177,21 @@ LOGGING = {
     }
 }
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'en'
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ru', 'Russian'),
+    ('kk', 'Kazakh'),
+]
+
 USE_I18N = True
+TIME_ZONE = 'UTC'
 USE_TZ = True
 
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'noreply@blog.com'

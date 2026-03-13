@@ -5,13 +5,16 @@ from django.db.models import QuerySet
 from django.core.cache import cache
 from django_ratelimit.decorators import ratelimit
 from django.utils.decorators import method_decorator
+from django.utils.translation import get_language
 
-from .constants import PUBLISHED_POSTS_LIST_CACHE_KEY, PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS
+from .constants import PUBLISHED_POSTS_LIST_CACHE_KEY_PREFIX, PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS
 from .models import *
 from .serializers import PostSerializer, CommentSerializer
 from .permissions import IsOwnerOrReadOnly
 from .pagination import DefaultPagination
 from .redis_pubsub import publist_comment_created
+
+from apps.users.constants import SUPPORTED_LANGUAGE_CODES
 
 import logging
 
@@ -25,31 +28,32 @@ class PostViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action in ("list", "retrieve"):
-            permission_classes = [permissions.AllowAny]
+            return [permissions.AllowAny()]
         return [permissions.IsAuthenticated(), IsOwnerOrReadOnly()]
     
     def get_queryset(self) -> QuerySet[Post]:
         qs = Post.objects.select_related('author', 'category').prefetch_related('tags')
         if self.action in ('list', 'retrieve'):
-            return qs.filter(status='published')
+            return qs.filter(status=PostStatus.PUBLISHED)
         return qs
 
     def perform_create(self, serializer: PostSerializer) -> None:
         logger.info("Post create attempt by user: %s", self.request.user.id)
         post = serializer.save(author=self.request.user)
-        cache.delete(PUBLISHED_POSTS_LIST_CACHE_KEY)
+        self._invalidate_posts_list_cache()
         logger.info("Post created successfully: id=%s, slug=%s, author_id=%s", post.id, post.slug, post.author_id)
         
     def perform_update(self, serializer: PostSerializer) -> None:
         post = self.get_object()
         logger.info("Post update attempt: id=%s slug=%s by user: %s", post.id, post.slug, self.request.user.id)
         serializer.save()
-        cache.delete(PUBLISHED_POSTS_LIST_CACHE_KEY)
+        self._invalidate_posts_list_cache()
         logger.info("Post updated successfully: id=%s slug=%s", post.id, post.slug)
         
     def perform_destroy(self, instance: Post) -> None:
         logger.info("Post delete attempt: id=%s slug=%s by user: %s", instance.id, instance.slug, self.request.user.id)
         instance.delete()
+        self._invalidate_posts_list_cache()
         logger.info("Post deleted successfully: id=%s slug=%s", instance.id, instance.slug)
         
     @action(detail=True, methods=['get', 'post'], url_path='comments')
@@ -80,7 +84,7 @@ class PostViewSet(viewsets.ModelViewSet):
             logger.exception("Error occurred while creating comment: post_slug=%s by user: %s", post.slug, request.user.id)
             raise
         
-        publish_comment_created({
+        publist_comment_created({
             "event": "comment_created",
             "comment_id": comment.id,
             "post_id": comment.post_id,
@@ -95,19 +99,38 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
     
     def list(self, request, *args, **kwargs):
-        cached_data = cache.get(PUBLISHED_POSTS_LIST_CACHE_KEY)
+        language = get_language() or "en"
+        cache_key = f"{PUBLISHED_POSTS_LIST_CACHE_KEY_PREFIX}:{language}"
+
+        cached_data = cache.get(cache_key)
         if cached_data is not None:
-            logger.debug("Cache hit for published posts list")
+            logger.debug("Cache hit for published posts list, language=%s", language)
             return Response(cached_data)
-        
+
         queryset = self.filter_queryset(self.get_queryset())
-        
-        page = self.paginate_queryset
-        serializer = self.get_serializer(page, many=True)
-        data = self.get_paginated_response(serializer.data).data
-        cache.set(PUBLISHED_POSTS_LIST_CACHE_KEY, data, timeout=PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS)
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            data = self.get_paginated_response(serializer.data).data
+        else:
+            serializer = self.get_serializer(queryset, many=True)
+            data = serializer.data
+
+        cache.set(
+            cache_key,
+            data,
+            timeout=PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS,
+        )
+
+        logger.debug("Cache set for published posts list, language=%s", language)
         return Response(data)
     
     @method_decorator(ratelimit(key='ip', rate='20/m', block=True, method='POST'))
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
+    
+    def _invalidate_posts_list_cache(self) -> None:
+        for language_code in SUPPORTED_LANGUAGE_CODES:
+            cache_key = f"{PUBLISHED_POSTS_LIST_CACHE_KEY_PREFIX}:{language_code}"
+            cache.delete(cache_key)

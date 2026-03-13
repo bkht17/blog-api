@@ -11,3 +11,5 @@ settings/.env
 
 .vscode/
 .idea/
+
+*.mo

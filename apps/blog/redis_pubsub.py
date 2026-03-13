@@ -17,4 +17,4 @@ def _redis_client() -> redis.Redis:
     
 def publist_comment_created(payload: dict):
     client = _redis_client()
-    client.publish('comment_created', json.dumps(payload))
+    client.publish('comments', json.dumps(payload))
