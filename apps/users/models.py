@@ -4,7 +4,7 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils import timezone
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .constants import SUPPORTED_LANGUAGES_CHOICES, DEFAULT_TIMEZONE, LANGUAGE_EN
+from .constants import SUPPORTED_LANGUAGE_CHOICES, DEFAULT_TIMEZONE, LANGUAGE_EN
 
 class UserManager(BaseUserManager["User"]):
     def create_user(self, email: str , password: str | None=None, **extra_fields: object) -> "User":
@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
     preferred_language = models.CharField(
         max_length=2,
-        choices=SUPPORTED_LANGUAGES_CHOICES,
+        choices=SUPPORTED_LANGUAGE_CHOICES,
         default=LANGUAGE_EN,
         verbose_name=_('Preferred Language')
     )

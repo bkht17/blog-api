@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .constants import SUPPORTED_LANGUAGES_CODES
+from .constants import SUPPORTED_LANGUAGE_CODES
 from django.utils.translation import gettext_lazy as _
 from zoneinfo import available_timezones
 
@@ -33,7 +33,7 @@ class RegisterSerializer(serializers.Serializer):
     
 class UserLanguageSerializer(serializers.Serializer):
     preferred_language = serializers.ChoiceField(
-        choices=sorted(SUPPORTED_LANGUAGES_CODES),
+        choices=sorted(SUPPORTED_LANGUAGE_CODES),
     )
     
 class UserTimezoneSerializer(serializers.Serializer):
