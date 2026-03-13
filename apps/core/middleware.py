@@ -1,7 +1,7 @@
 from django.utils.translation import get_language_from_request
 from django.utils import timezone, translation
 
-from apps.users.constants import SUPPORTED_LANGUAGES_CODES, DEFAULT_TIMEZONE, LANGUAGE_EN
+from apps.users.constants import SUPPORTED_LANGUAGE_CODES, DEFAULT_TIMEZONE, LANGUAGE_EN
 
 class LanguageTimezoneMiddleware:
     """
@@ -27,19 +27,19 @@ class LanguageTimezoneMiddleware:
         #User profile lang
         if request.user.is_authenticated:
             user_language = getattr(request.user, 'preferred_language', None)
-            if user_language in SUPPORTED_LANGUAGES_CODES:
+            if user_language in SUPPORTED_LANGUAGE_CODES:
                 language = user_language
                 
         #Query param 
         if not language:
             lang_param = request.GET.get('lang')
-            if lang_param in SUPPORTED_LANGUAGES_CODES:
+            if lang_param in SUPPORTED_LANGUAGE_CODES:
                 language = lang_param
                 
         #Accept-Language header
         if not language:
             header_lang = get_language_from_request(request)
-            if header_lang in SUPPORTED_LANGUAGES_CODES:
+            if header_lang in SUPPORTED_LANGUAGE_CODES:
                 language = header_lang
         
         #Default
@@ -56,12 +56,14 @@ class LanguageTimezoneMiddleware:
                 try:
                     timezone.activate(user_timezone)
                 except Exception:
-                    timezone.deactivate()
+                    timezone.activate("UTC")
+            else:
+                timezone.activate("UTC")
         else:
-            timezone.deactivate()
+            timezone.activate("UTC")
             
         response = self.get_response(request)
-        translation.deactivate()
+        response["Content-Language"] = language
         return response
                 
             
