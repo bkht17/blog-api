@@ -1,7 +1,8 @@
 from django.utils.translation import get_language_from_request
 from django.utils import timezone, translation
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from apps.users.constants import SUPPORTED_LANGUAGE_CODES, DEFAULT_TIMEZONE, LANGUAGE_EN
+from apps.users.constants import SUPPORTED_LANGUAGE_CODES, LANGUAGE_EN
 
 class LanguageTimezoneMiddleware:
     """
@@ -23,10 +24,19 @@ class LanguageTimezoneMiddleware:
 
     def __call__(self, request):
         language = None
+        user = None
+        
+        try:
+            jwt_auth = JWTAuthentication()
+            result = jwt_auth.authenticate(request)
+            if result is not None:
+                user, _ = result
+        except Exception:
+            pass
         
         #User profile lang
-        if request.user.is_authenticated:
-            user_language = getattr(request.user, 'preferred_language', None)
+        if user is not None:
+            user_language = getattr(user, 'preferred_language', None)
             if user_language in SUPPORTED_LANGUAGE_CODES:
                 language = user_language
                 
