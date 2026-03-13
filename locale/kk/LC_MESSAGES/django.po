@@ -53,7 +53,7 @@ msgstr "тіркелген күні"
 msgid "avatar"
 msgstr "аватар"
 
-msgid "Language preference updated successfully."
+msgid "Preferred language updated successfully."
 msgstr "Тіл параметрі сәтті жаңартылды."
 
 msgid "Timezone updated successfully."
@@ -61,3 +61,12 @@ msgstr "Уақыт белдеуі сәтті жаңартылды."
 
 msgid "Invalid timezone."
 msgstr "Уақыт белдеуі қате."
+
+msgid "Category"
+msgstr "Санат"
+
+msgid "Categories"
+msgstr "Санаттар"
+
+msgid "Passwords do not match."
+msgstr "Құпия сөздер сәйкес келмейді."

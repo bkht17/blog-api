@@ -129,3 +129,15 @@
 2026-03-13 12:38:34,145 DEBUG debug_requests middleware REQUEST GET /admin/users/user/ ip=127.0.0.1
 2026-03-13 12:38:34,164 DEBUG debug_requests middleware REQUEST GET /admin/jsi18n/ ip=127.0.0.1
 2026-03-13 12:38:39,492 DEBUG debug_requests middleware REQUEST POST /api/auth/register/ ip=127.0.0.1
+2026-03-13 12:45:24,559 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-13 12:45:45,753 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-13 12:46:12,080 DEBUG debug_requests middleware REQUEST POST /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:46:16,779 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:46:25,516 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:47:01,337 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/?lang=ru ip=127.0.0.1
+2026-03-13 12:47:20,024 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:52:19,395 DEBUG debug_requests middleware REQUEST POST /api/auth/token/ ip=127.0.0.1
+2026-03-13 12:52:30,933 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:52:36,424 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:52:44,943 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1
+2026-03-13 12:52:49,395 DEBUG debug_requests middleware REQUEST PATCH /api/auth/language/ ip=127.0.0.1

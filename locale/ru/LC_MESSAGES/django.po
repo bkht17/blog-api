@@ -55,7 +55,7 @@ msgstr "дата регистрации"
 msgid "avatar"
 msgstr "аватар"
 
-msgid "Language preference updated successfully."
+msgid "Preferred language updated successfully."
 msgstr "Языковая настройка успешно обновлена."
 
 msgid "Timezone updated successfully."
@@ -63,3 +63,12 @@ msgstr "Часовой пояс успешно обновлён."
 
 msgid "Invalid timezone."
 msgstr "Некорректный часовой пояс."
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Categories"
+msgstr "Категории"
+
+msgid "Passwords do not match."
+msgstr "Пароли не совпадают."
