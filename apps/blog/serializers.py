@@ -3,6 +3,8 @@ from .models import *
 from django.utils.formats import date_format
 from django.utils.timezone import localtime
 from django.utils.translation import get_language
+from drf_spectacular.utils import extend_schema_field
+from rest_framework import serializers as drf_serializers
 
 class CategorySerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField()
@@ -10,7 +12,8 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ("id", "name", "slug")
-        
+    
+    @extend_schema_field(drf_serializers.CharField())
     def get_name(self, obj):
         language = get_language() or 'en'
         
@@ -86,9 +89,11 @@ class PostSerializer(serializers.ModelSerializer):
         
         return instance
     
+    @extend_schema_field(drf_serializers.CharField())
     def get_created_at_local(self, obj):
         return self._format_localized_datetime(obj.created_at)
     
+    @extend_schema_field(drf_serializers.CharField())
     def get_updated_at_local(self, obj):
         return self._format_localized_datetime(obj.updated_at)
     
