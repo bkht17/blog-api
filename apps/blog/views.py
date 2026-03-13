@@ -28,7 +28,7 @@ class PostViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         if self.action in ("list", "retrieve"):
-            permission_classes = [permissions.AllowAny]
+            permission_classes = [permissions.AllowAny()]
         return [permissions.IsAuthenticated(), IsOwnerOrReadOnly()]
     
     def get_queryset(self) -> QuerySet[Post]:
@@ -84,7 +84,7 @@ class PostViewSet(viewsets.ModelViewSet):
             logger.exception("Error occurred while creating comment: post_slug=%s by user: %s", post.slug, request.user.id)
             raise
         
-        publish_comment_created({
+        publist_comment_created({
             "event": "comment_created",
             "comment_id": comment.id,
             "post_id": comment.post_id,
