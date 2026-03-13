@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import *
+from django.utils.formats import date_format
+from django.utils.timezone import localtime
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -17,6 +19,8 @@ class PostSerializer(serializers.ModelSerializer):
     category_id = serializers.IntegerField(write_only=True, required=False, allow_null=True)
     tags = TagSerializer(many=True, read_only=True)
     tag_ids = serializers.ListField(write_only=True, child=serializers.IntegerField(), required=False)
+    created_at_local = serializers.SerializerMethodField()
+    updated_at_local = serializers.SerializerMethodField()
     
     class Meta:
         model = Post
@@ -33,6 +37,8 @@ class PostSerializer(serializers.ModelSerializer):
             "status",
             "created_at",
             "updated_at",
+            "created_at_local",
+            "updated_at_local",
         )
         read_only_fields = ("created_at", "updated_at")
         
@@ -67,6 +73,19 @@ class PostSerializer(serializers.ModelSerializer):
             instance.tags.set(tag_ids)
         
         return instance
+    
+    def get_created_at_local(self, obj):
+        return self._format_localized_datetime(obj.created_at)
+    
+    def get_updated_at_local(self, obj):
+        return self._format_localized_datetime(obj.updated_at)
+    
+    def _format_localized_datetime(self, value):
+        if not value:
+            return None
+        
+        localized_value = localtime(value)
+        return date_format(localized_value, format='DATETIME_FORMAT', use_l10n=True)
     
 class CommentSerializer(serializers.ModelSerializer):
     author_email = serializers.EmailField(source='author.email', read_only=True)
