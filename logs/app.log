@@ -318,3 +318,85 @@ rest_framework.exceptions.AuthenticationFailed: No active account found with the
 2026-03-12 18:36:13,601 WARNING django.request log Bad Request: /api/auth/timezone/
 2026-03-12 18:38:16,937 WARNING django.request log Unauthorized: /api/posts/
 2026-03-12 18:38:19,691 WARNING django.request log Bad Request: /api/auth/timezone/
+2026-03-13 08:14:03,633 WARNING django.request log Unauthorized: /api/posts/
+2026-03-13 08:15:04,845 WARNING django.request log Method Not Allowed: /api/posts/
+2026-03-13 08:15:08,569 ERROR django.request log Internal Server Error: /api/posts/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 107, in list
+    data = self.get_paginated_response(serializer.data).data
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 797, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 715, in to_representation
+    return [
+           ^
+TypeError: 'method' object is not iterable
+2026-03-13 08:15:27,149 ERROR django.request log Internal Server Error: /api/posts/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 107, in list
+    data = self.get_paginated_response(serializer.data).data
+                                       ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 797, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 251, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 715, in to_representation
+    return [
+           ^
+TypeError: 'method' object is not iterable
+2026-03-13 08:16:54,342 WARNING django.request log Unauthorized: /api/posts/
+2026-03-13 08:24:39,141 WARNING django.request log Method Not Allowed: /api/posts/
+2026-03-13 08:29:32,545 WARNING django.request log Unauthorized: /api/posts/
+2026-03-13 09:18:53,511 WARNING django.request log Not Found: /
+2026-03-13 09:18:55,528 WARNING django.request log Not Found: /
+2026-03-13 09:22:49,318 WARNING django.request log Method Not Allowed: /api/auth/language/

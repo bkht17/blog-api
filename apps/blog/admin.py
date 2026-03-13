@@ -5,10 +5,10 @@ from .models import *
 # Register your models here.
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    prepopulated_fields = {'slug': ('name',)}
-    list_display = ('name', 'slug')
-    search_fields = ('name', 'slug')
-    
+    prepopulated_fields = {'slug': ('name_en',)}
+    list_display = ('name_en', 'name_ru', 'name_kk', 'slug')
+    search_fields = ('name_en', 'name_ru', 'name_kk', 'slug')
+
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}

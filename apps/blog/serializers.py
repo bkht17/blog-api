@@ -2,11 +2,23 @@ from rest_framework import serializers
 from .models import *
 from django.utils.formats import date_format
 from django.utils.timezone import localtime
+from django.utils.translation import get_language
 
 class CategorySerializer(serializers.ModelSerializer):
+    name = serializers.SerializerMethodField()
+    
     class Meta:
         model = Category
         fields = ("id", "name", "slug")
+        
+    def get_name(self, obj):
+        language = get_language() or 'en'
+        
+        if language == "ru":
+            return obj.name_ru
+        elif language == "kk":
+            return obj.name_kk
+        return obj.name_en
         
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
