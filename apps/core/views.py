@@ -60,15 +60,17 @@ class StatsView(View):
             _fetch_current_time(),
         )
 
-        return JsonResponse({
-            "blog": {
-                "total_posts": total_posts,
-                "total_comments": total_comments,
-                "total_users": total_users,
-            },
-            "exchange_rates": exchange_rates,
-            "current_time": current_time,
-        })
+        return JsonResponse(
+            {
+                "blog": {
+                    "total_posts": total_posts,
+                    "total_comments": total_comments,
+                    "total_users": total_users,
+                },
+                "exchange_rates": exchange_rates,
+                "current_time": current_time,
+            }
+        )
 
 
 # stats_view — ready-to-use in urls.py with Swagger docs attached
@@ -88,7 +90,11 @@ stats_view = extend_schema(
                 OpenApiExample(
                     "Success",
                     value={
-                        "blog": {"total_posts": 42, "total_comments": 137, "total_users": 15},
+                        "blog": {
+                            "total_posts": 42,
+                            "total_comments": 137,
+                            "total_users": 15,
+                        },
                         "exchange_rates": {"KZT": 450.23, "RUB": 89.10, "EUR": 0.92},
                         "current_time": "2024-03-15T18:30:00+05:00",
                     },

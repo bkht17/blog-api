@@ -6,18 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='user',
-            name='preferred_language',
-            field=models.CharField(choices=[('en', 'English'), ('ru', 'Russian'), ('kz', 'Kazakh')], default='en', max_length=2, verbose_name='Preferred Language'),
+            model_name="user",
+            name="preferred_language",
+            field=models.CharField(
+                choices=[("en", "English"), ("ru", "Russian"), ("kz", "Kazakh")],
+                default="en",
+                max_length=2,
+                verbose_name="Preferred Language",
+            ),
         ),
         migrations.AddField(
-            model_name='user',
-            name='timezone',
-            field=models.CharField(default='UTC', max_length=64, verbose_name='Timezone'),
+            model_name="user",
+            name="timezone",
+            field=models.CharField(
+                default="UTC", max_length=64, verbose_name="Timezone"
+            ),
         ),
     ]

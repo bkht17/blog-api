@@ -6,41 +6,51 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('blog', '0001_initial'),
+        ("blog", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='category',
-            options={'verbose_name': 'Category', 'verbose_name_plural': 'Categories'},
+            name="category",
+            options={"verbose_name": "Category", "verbose_name_plural": "Categories"},
         ),
         migrations.RemoveField(
-            model_name='category',
-            name='name',
+            model_name="category",
+            name="name",
         ),
         migrations.AddField(
-            model_name='category',
-            name='name_en',
-            field=models.CharField(default='', max_length=100, unique=True, verbose_name='english name'),
+            model_name="category",
+            name="name_en",
+            field=models.CharField(
+                default="", max_length=100, unique=True, verbose_name="english name"
+            ),
         ),
         migrations.AddField(
-            model_name='category',
-            name='name_kk',
-            field=models.CharField(default='', max_length=100, unique=True, verbose_name='kazakh name'),
+            model_name="category",
+            name="name_kk",
+            field=models.CharField(
+                default="", max_length=100, unique=True, verbose_name="kazakh name"
+            ),
         ),
         migrations.AddField(
-            model_name='category',
-            name='name_ru',
-            field=models.CharField(default='', max_length=100, unique=True, verbose_name='russian name'),
+            model_name="category",
+            name="name_ru",
+            field=models.CharField(
+                default="", max_length=100, unique=True, verbose_name="russian name"
+            ),
         ),
         migrations.AlterField(
-            model_name='category',
-            name='slug',
-            field=models.SlugField(unique=True, verbose_name='slug'),
+            model_name="category",
+            name="slug",
+            field=models.SlugField(unique=True, verbose_name="slug"),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='status',
-            field=models.CharField(choices=[('draft', 'Draft'), ('published', 'Published')], default='draft', max_length=20),
+            model_name="post",
+            name="status",
+            field=models.CharField(
+                choices=[("draft", "Draft"), ("published", "Published")],
+                default="draft",
+                max_length=20,
+            ),
         ),
     ]

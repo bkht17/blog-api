@@ -7,12 +7,13 @@ from urllib.parse import urlparse
 
 from redis.asyncio import Redis
 
+
 class Command(BaseCommand):
     help = "Subscribe to Redis 'comments' channel and print incoming messages."
 
     def handle(self, *args, **options):
         asyncio.run(self._listen())
-    
+
     # async is used here because Redis pub/sub is pure I/O — we need to
     # listen indefinitely without blocking the process. A sync version
     # would require threads; asyncio handles this natively.
@@ -26,15 +27,15 @@ class Command(BaseCommand):
             password=url.password,
             decode_responses=True,
         )
-        
+
         pubsub = client.pubsub()
         await pubsub.subscribe("comments")
         self.stdout.write(self.style.SUCCESS("Listening to Redis channel: comments"))
-        
+
         async for message in pubsub.listen():
             if message.get("type") != "message":
                 continue
-            
+
             raw = message.get("data", "")
             try:
                 event = json.loads(raw)

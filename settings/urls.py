@@ -14,17 +14,26 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 from apps.core.views import stats_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('apps.blog.urls')),
-    path('api/auth/', include('apps.users.urls')),
-    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
-    path('api/stats/', stats_view, name='stats')
+    path("admin/", admin.site.urls),
+    path("api/", include("apps.blog.urls")),
+    path("api/auth/", include("apps.users.urls")),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/docs/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path("api/stats/", stats_view, name="stats"),
 ]
