@@ -280,3 +280,13 @@
 2026-03-13 14:48:34,924 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
 2026-03-13 14:48:35,505 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1
 2026-03-13 14:48:42,423 DEBUG debug_requests middleware REQUEST POST /api/auth/register/ ip=127.0.0.1
+2026-03-14 07:27:45,484 DEBUG debug_requests middleware REQUEST GET / ip=127.0.0.1
+2026-03-14 07:27:46,909 DEBUG debug_requests middleware REQUEST GET / ip=127.0.0.1
+2026-03-14 07:27:51,208 DEBUG debug_requests middleware REQUEST GET / ip=127.0.0.1
+2026-03-14 07:27:51,611 DEBUG debug_requests middleware REQUEST GET /admin/ ip=127.0.0.1
+2026-03-14 07:27:51,627 DEBUG debug_requests middleware REQUEST GET /admin/login/?next=/admin/ ip=127.0.0.1
+2026-03-14 07:27:52,809 DEBUG debug_requests middleware REQUEST GET /api/ ip=127.0.0.1
+2026-03-14 07:27:53,838 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
+2026-03-14 07:27:54,243 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1
+2026-03-14 07:27:55,006 DEBUG debug_requests middleware REQUEST GET /api/docs/ ip=127.0.0.1
+2026-03-14 07:27:55,048 DEBUG debug_requests middleware REQUEST GET /api/schema/ ip=127.0.0.1

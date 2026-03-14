@@ -1,10 +1,13 @@
-from rest_framework import serializers
-from .models import Category, Tag, Post, Comment
+from typing import Any
+
 from django.utils.formats import date_format
 from django.utils.timezone import localtime
 from django.utils.translation import get_language
 from drf_spectacular.utils import extend_schema_field
+from rest_framework import serializers
 from rest_framework import serializers as drf_serializers
+
+from .models import Category, Comment, Post, Tag
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -15,7 +18,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ("id", "name", "slug")
 
     @extend_schema_field(drf_serializers.CharField())
-    def get_name(self, obj):
+    def get_name(self, obj: Category) -> str:
         language = get_language() or "en"
 
         if language == "ru":
@@ -64,7 +67,7 @@ class PostSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ("created_at", "updated_at")
 
-    def create(self, validated_data: dict) -> Post:
+    def create(self, validated_data: dict[str, Any]) -> Post:
         category_id = validated_data.pop("category_id", None)
         tag_ids = validated_data.pop("tag_ids", [])
 
@@ -79,7 +82,7 @@ class PostSerializer(serializers.ModelSerializer):
 
         return post
 
-    def update(self, instance: Post, validated_data: dict) -> Post:
+    def update(self, instance: Post, validated_data: dict[str, Any]) -> Post:
         category_id = validated_data.pop("category_id", None)
         tag_ids = validated_data.pop("tag_ids", [])
 
@@ -97,14 +100,14 @@ class PostSerializer(serializers.ModelSerializer):
         return instance
 
     @extend_schema_field(drf_serializers.CharField())
-    def get_created_at_local(self, obj):
+    def get_created_at_local(self, obj: Post) -> str | None:
         return self._format_localized_datetime(obj.created_at)
 
     @extend_schema_field(drf_serializers.CharField())
-    def get_updated_at_local(self, obj):
+    def get_updated_at_local(self, obj: Post) -> str | None:
         return self._format_localized_datetime(obj.updated_at)
 
-    def _format_localized_datetime(self, value):
+    def _format_localized_datetime(self, value: Any) -> str | None:
         if not value:
             return None
 

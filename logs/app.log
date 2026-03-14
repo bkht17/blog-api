@@ -977,3 +977,6 @@ django.db.utils.IntegrityError: FOREIGN KEY constraint failed
 2026-03-13 14:34:20,456 WARNING django.request log Not Found: /static/admin/img/icon-deletelink.svg
 2026-03-13 14:34:23,674 WARNING django.request log Not Found: /static/admin/img/icon-deletelink.svg
 2026-03-13 14:34:23,689 WARNING django.request log Not Found: /static/admin/img/icon-deletelink.svg
+2026-03-14 07:27:45,500 WARNING django.request log Not Found: /
+2026-03-14 07:27:46,915 WARNING django.request log Not Found: /
+2026-03-14 07:27:51,214 WARNING django.request log Not Found: /

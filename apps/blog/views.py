@@ -1,21 +1,24 @@
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from django.db.models import QuerySet
+from typing import Any
+
 from django.core.cache import cache
-from django_ratelimit.decorators import ratelimit
+from django.db.models import QuerySet
 from django.utils.decorators import method_decorator
 from django.utils.translation import get_language
+from django_ratelimit.decorators import ratelimit
+from rest_framework import permissions, status, viewsets
+from rest_framework.decorators import action
+from rest_framework.request import Request
+from rest_framework.response import Response
 
 from .constants import (
     PUBLISHED_POSTS_LIST_CACHE_KEY_PREFIX,
     PUBLISHED_POSTS_LIST_CACHE_TTL_SECONDS,
 )
-from .models import Post, PostStatus, Comment
-from .serializers import PostSerializer, CommentSerializer
-from .permissions import IsOwnerOrReadOnly
+from .models import Comment, Post, PostStatus
 from .pagination import DefaultPagination
+from .permissions import IsOwnerOrReadOnly
 from .redis_pubsub import publist_comment_created
+from .serializers import CommentSerializer, PostSerializer
 
 from apps.users.constants import SUPPORTED_LANGUAGE_CODES
 
@@ -30,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
     pagination_class = DefaultPagination
     lookup_field = "slug"
 
-    def get_permissions(self):
+    def get_permissions(self) -> list[permissions.BasePermission]:
         if self.action in ("list", "retrieve"):
             return [permissions.AllowAny()]
         return [permissions.IsAuthenticated(), IsOwnerOrReadOnly()]
@@ -78,7 +81,7 @@ class PostViewSet(viewsets.ModelViewSet):
         )
 
     @action(detail=True, methods=["get", "post"], url_path="comments")
-    def comments(self, request, slug=None):
+    def comments(self, request: Request, slug: str | None = None) -> Response:
         post = self.get_object()
         if request.method == "GET":
             qs = (
@@ -141,7 +144,7 @@ class PostViewSet(viewsets.ModelViewSet):
         )
         return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
 
-    def list(self, request, *args, **kwargs):
+    def list(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         language = get_language() or "en"
         cache_key = f"{PUBLISHED_POSTS_LIST_CACHE_KEY_PREFIX}:{language}"
 
@@ -170,7 +173,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response(data)
 
     @method_decorator(ratelimit(key="ip", rate="20/m", block=True, method="POST"))
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Request, *args: Any, **kwargs: Any) -> Response:
         return super().create(request, *args, **kwargs)
 
     def _invalidate_posts_list_cache(self) -> None:

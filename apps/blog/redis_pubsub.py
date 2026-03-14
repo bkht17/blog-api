@@ -1,4 +1,5 @@
 import json
+from typing import Any, Mapping
 from urllib.parse import urlparse
 
 import redis
@@ -17,6 +18,6 @@ def _redis_client() -> redis.Redis:
     )
 
 
-def publist_comment_created(payload: dict):
+def publist_comment_created(payload: Mapping[str, Any]) -> None:
     client = _redis_client()
-    client.publish("comments", json.dumps(payload))
+    client.publish("comments", json.dumps(dict(payload)))
