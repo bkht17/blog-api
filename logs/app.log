@@ -980,3 +980,1345 @@ django.db.utils.IntegrityError: FOREIGN KEY constraint failed
 2026-03-14 07:27:45,500 WARNING django.request log Not Found: /
 2026-03-14 07:27:46,915 WARNING django.request log Not Found: /
 2026-03-14 07:27:51,214 WARNING django.request log Not Found: /
+2026-04-12 13:00:37,033 WARNING django.request log Not Found: /
+2026-04-12 13:00:48,727 WARNING django.request log Not Found: /docs
+2026-04-12 13:00:51,562 WARNING django.request log Not Found: /docs
+2026-04-12 13:00:53,271 WARNING django.request log Not Found: /docs/
+2026-04-12 13:01:48,434 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 89, in add
+    return self.client.add(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 278, in add
+    return self.set(key, value, timeout, version=version, client=client, nx=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 224, in set
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 231, in get_usage
+    added = cache.add(cache_key, initial_value, period + EXPIRATION_FUDGE)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__  # noqa: B904
+    ^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 214, in set
+    return bool(client.set(nkey, nvalue, nx=nx, px=timeout, xx=xx))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 493, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/commands/core.py", line 2668, in set
+    return self.execute_command("SET", *pieces, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 2960, in get_connection
+    connection.connect()
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 975, in connect
+    self.retry.call_with_retry(
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 976, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 1024, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2026-04-12 13:02:09,639 WARNING django.request log Not Found: /docs
+2026-04-12 13:02:15,793 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:15,799 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:15,799 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:15,805 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:15,806 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:15,806 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:15,806 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:18,884 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:18,893 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:18,893 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:18,899 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:18,900 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:18,904 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:18,904 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:19,416 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:19,427 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:19,427 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:19,427 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:19,435 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:19,435 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:19,435 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:19,762 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:19,771 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:19,775 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:19,777 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:19,782 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:19,782 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:19,783 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:20,091 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:20,095 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:20,102 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:20,102 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:20,105 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:20,105 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:20,109 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:20,433 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:20,441 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:20,443 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:20,445 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:20,451 WARNING django.request log Not Found: /static/admin/css/login.css
+2026-04-12 13:02:20,452 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:20,452 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:31,102 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:31,106 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:31,113 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:31,113 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:31,114 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:31,114 WARNING django.request log Not Found: /static/admin/css/dashboard.css
+2026-04-12 13:02:31,117 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:37,156 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:37,173 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:37,177 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:37,177 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:37,178 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:37,182 WARNING django.request log Not Found: /static/admin/css/changelists.css
+2026-04-12 13:02:37,189 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:02:37,195 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:02:37,199 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:02:37,200 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:02:37,201 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:02:37,206 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:02:37,211 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:02:37,217 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:02:37,219 WARNING django.request log Not Found: /static/admin/js/filters.js
+2026-04-12 13:02:37,219 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:37,230 WARNING django.request log Not Found: /static/admin/img/search.svg
+2026-04-12 13:02:37,230 WARNING django.request log Not Found: /static/admin/img/icon-yes.svg
+2026-04-12 13:02:37,236 WARNING django.request log Not Found: /static/admin/img/icon-no.svg
+2026-04-12 13:02:45,790 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:02:45,805 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:02:45,809 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:02:45,809 WARNING django.request log Not Found: /static/admin/css/forms.css
+2026-04-12 13:02:45,809 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:02:45,809 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:02:45,823 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:02:45,829 WARNING django.request log Not Found: /static/admin/js/calendar.js
+2026-04-12 13:02:45,830 WARNING django.request log Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2026-04-12 13:02:45,833 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:02:45,834 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:02:45,834 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:02:45,840 WARNING django.request log Not Found: /static/admin/js/SelectBox.js
+2026-04-12 13:02:45,848 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:02:45,849 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:02:45,850 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:02:45,850 WARNING django.request log Not Found: /static/admin/js/SelectFilter2.js
+2026-04-12 13:02:45,851 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:02:45,856 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:02:45,858 WARNING django.request log Not Found: /static/admin/js/prepopulate_init.js
+2026-04-12 13:02:45,860 WARNING django.request log Not Found: /static/admin/js/change_form.js
+2026-04-12 13:02:45,863 WARNING django.request log Not Found: /static/admin/img/icon-addlink.svg
+2026-04-12 13:03:17,443 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:03:17,455 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:03:17,457 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:03:17,457 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:03:17,461 WARNING django.request log Not Found: /static/admin/css/forms.css
+2026-04-12 13:03:17,462 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:03:17,469 WARNING django.request log Not Found: /static/admin/css/unusable_password_field.css
+2026-04-12 13:03:17,474 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:03:17,474 WARNING django.request log Not Found: /static/admin/js/unusable_password_field.js
+2026-04-12 13:03:29,058 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:03:29,069 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:03:29,074 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:03:29,075 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:03:29,080 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:03:29,081 WARNING django.request log Not Found: /static/admin/css/forms.css
+2026-04-12 13:03:29,086 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:03:29,091 WARNING django.request log Not Found: /static/admin/js/calendar.js
+2026-04-12 13:03:29,092 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:03:29,095 WARNING django.request log Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2026-04-12 13:03:29,100 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:03:29,104 WARNING django.request log Not Found: /static/admin/js/SelectBox.js
+2026-04-12 13:03:29,107 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:03:29,112 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:03:29,113 WARNING django.request log Not Found: /static/admin/js/SelectFilter2.js
+2026-04-12 13:03:29,114 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:03:29,121 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:03:29,121 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:03:29,121 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:03:29,126 WARNING django.request log Not Found: /static/admin/js/prepopulate_init.js
+2026-04-12 13:03:29,127 WARNING django.request log Not Found: /static/admin/js/change_form.js
+2026-04-12 13:03:29,130 WARNING django.request log Not Found: /static/admin/img/icon-addlink.svg
+2026-04-12 13:03:35,824 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 89, in add
+    return self.client.add(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 278, in add
+    return self.set(key, value, timeout, version=version, client=client, nx=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 224, in set
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 231, in get_usage
+    added = cache.add(cache_key, initial_value, period + EXPIRATION_FUDGE)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__  # noqa: B904
+    ^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 214, in set
+    return bool(client.set(nkey, nvalue, nx=nx, px=timeout, xx=xx))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 493, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/commands/core.py", line 2668, in set
+    return self.execute_command("SET", *pieces, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 2960, in get_connection
+    connection.connect()
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 975, in connect
+    self.retry.call_with_retry(
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 976, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 1024, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2026-04-12 13:03:52,992 ERROR django.request log Internal Server Error: /api/auth/token/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 29, in _decorator
+    return method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 89, in add
+    return self.client.add(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 278, in add
+    return self.set(key, value, timeout, version=version, client=client, nx=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 224, in set
+    raise ConnectionInterrupted(connection=client) from e
+django_redis.exceptions.ConnectionInterrupted: Redis ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/utils/decorators.py", line 48, in _wrapper
+    return bound_method(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/decorators.py", line 19, in _wrapped
+    ratelimited = is_ratelimited(request=request, group=group, fn=fn,
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 153, in is_ratelimited
+    usage = get_usage(request, group, fn, key, rate, method, increment)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_ratelimit/core.py", line 231, in get_usage
+    added = cache.add(cache_key, initial_value, period + EXPIRATION_FUDGE)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/cache.py", line 36, in _decorator
+    raise e.__cause__  # noqa: B904
+    ^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django_redis/client/default.py", line 214, in set
+    return bool(client.set(nkey, nvalue, nx=nx, px=timeout, xx=xx))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 493, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/commands/core.py", line 2668, in set
+    return self.execute_command("SET", *pieces, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 716, in execute_command
+    return self._execute_command(*args, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/client.py", line 722, in _execute_command
+    conn = self.connection or pool.get_connection()
+                              ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/utils.py", line 236, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 2960, in get_connection
+    connection.connect()
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 975, in connect
+    self.retry.call_with_retry(
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 132, in call_with_retry
+    raise error
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/retry.py", line 120, in call_with_retry
+    return do()
+           ^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 976, in <lambda>
+    lambda: self.connect_check_health(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/redis/connection.py", line 1024, in connect_check_health
+    raise e
+redis.exceptions.ConnectionError: Error 61 connecting to 127.0.0.1:6379. Connection refused.
+2026-04-12 13:17:00,953 ERROR users views Error occurred during login for email: user@example.com
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/users/views.py", line 118, in post
+    response = super().post(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 57, in validate
+    raise exceptions.AuthenticationFailed(
+rest_framework.exceptions.AuthenticationFailed: No active account found with the given credentials
+2026-04-12 13:17:00,959 WARNING django.request log Unauthorized: /api/auth/token/
+2026-04-12 13:25:03,154 WARNING django.request log Not Found: /docs
+2026-04-12 13:25:09,953 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:25:09,961 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:25:09,970 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:25:09,971 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:25:09,972 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:25:09,972 WARNING django.request log Not Found: /static/admin/css/dashboard.css
+2026-04-12 13:25:09,973 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:25:13,838 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:25:13,853 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:25:13,854 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:25:13,857 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:25:13,858 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:25:13,868 WARNING django.request log Not Found: /static/admin/css/changelists.css
+2026-04-12 13:25:13,876 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:25:13,877 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:25:13,884 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:25:13,884 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:25:13,884 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:25:13,893 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:25:13,895 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:25:13,895 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:25:13,899 WARNING django.request log Not Found: /static/admin/js/filters.js
+2026-04-12 13:25:13,899 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:25:13,903 WARNING django.request log Not Found: /static/admin/img/search.svg
+2026-04-12 13:25:34,871 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:25:34,871 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:25:34,881 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:25:34,884 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:25:34,887 WARNING django.request log Not Found: /static/admin/css/forms.css
+2026-04-12 13:25:34,888 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:25:34,894 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:25:34,903 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:25:34,907 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:25:34,909 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:25:34,910 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:25:34,914 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:25:34,918 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:25:34,923 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:25:34,924 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:25:34,925 WARNING django.request log Not Found: /static/admin/js/change_form.js
+2026-04-12 13:25:34,926 WARNING django.request log Not Found: /static/admin/js/prepopulate_init.js
+2026-04-12 13:25:34,930 WARNING django.request log Not Found: /static/admin/img/icon-changelink.svg
+2026-04-12 13:25:34,932 WARNING django.request log Not Found: /static/admin/img/icon-addlink.svg
+2026-04-12 13:25:34,936 WARNING django.request log Not Found: /static/admin/img/icon-viewlink.svg
+2026-04-12 13:25:34,938 WARNING django.request log Not Found: /static/admin/img/icon-deletelink.svg
+2026-04-12 13:25:42,857 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:25:42,865 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:25:42,876 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:25:42,877 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:25:42,877 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:25:42,882 WARNING django.request log Not Found: /static/admin/css/changelists.css
+2026-04-12 13:25:42,896 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:25:42,896 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:25:42,896 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:25:42,896 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:25:42,901 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:25:42,902 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:25:42,907 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:25:42,912 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:25:42,912 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:25:42,912 WARNING django.request log Not Found: /static/admin/js/filters.js
+2026-04-12 13:25:42,916 WARNING django.request log Not Found: /static/admin/img/search.svg
+2026-04-12 13:25:57,083 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 13:25:57,089 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 13:25:57,096 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 13:25:57,097 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 13:25:57,104 WARNING django.request log Not Found: /static/admin/css/changelists.css
+2026-04-12 13:25:57,106 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 13:25:57,109 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 13:25:57,116 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 13:25:57,116 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 13:25:57,123 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 13:25:57,124 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 13:25:57,124 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 13:25:57,128 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 13:25:57,131 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 13:25:57,132 WARNING django.request log Not Found: /static/admin/js/filters.js
+2026-04-12 13:25:57,134 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 13:25:57,137 WARNING django.request log Not Found: /static/admin/img/search.svg
+2026-04-12 14:31:43,909 WARNING django.request log Not Found: /
+2026-04-12 14:31:47,415 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 61, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:31:47,448 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 61, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:31:49,590 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 61, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:31:49,621 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 61, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:56,818 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:56,856 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:57,580 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:57,610 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:58,121 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:33:58,149 ERROR django.request log Internal Server Error: /api/schema/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/generic/base.py", line 105, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 84, in get
+    return self._get_schema_response(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/views.py", line 92, in _get_schema_response
+    data=generator.get_schema(request=request, public=self.serve_public),
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 287, in get_schema
+    paths=self.parse(request, public),
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/generators.py", line 258, in parse
+    operation = view.schema.get_operation(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 105, in get_operation
+    auth = self.get_auth()
+           ^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/drf_spectacular/openapi.py", line 365, in get_auth
+    perms = [p.__class__ for p in self.view.get_permissions()]
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/notifications/views.py", line 62, in get_permissions
+    return [permission() for permission in self.permission_classes]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'BasePermissionMetaclass' object is not iterable
+2026-04-12 14:41:57,850 WARNING django.request log Not Found: /api/posts/stream/
+2026-04-12 14:41:58,459 WARNING django.request log Not Found: /static/rest_framework/css/bootstrap.min.css
+2026-04-12 14:41:58,461 WARNING django.request log Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+2026-04-12 14:41:58,461 WARNING django.request log Not Found: /static/rest_framework/css/prettify.css
+2026-04-12 14:41:58,464 WARNING django.request log Not Found: /static/rest_framework/css/default.css
+2026-04-12 14:41:58,473 WARNING django.request log Not Found: /static/rest_framework/js/ajax-form.js
+2026-04-12 14:41:58,473 WARNING django.request log Not Found: /static/rest_framework/js/jquery-3.7.1.min.js
+2026-04-12 14:41:58,484 WARNING django.request log Not Found: /static/rest_framework/js/csrf.js
+2026-04-12 14:41:58,484 WARNING django.request log Not Found: /static/rest_framework/js/prettify-min.js
+2026-04-12 14:41:58,485 WARNING django.request log Not Found: /static/rest_framework/js/default.js
+2026-04-12 14:41:58,485 WARNING django.request log Not Found: /static/rest_framework/js/bootstrap.min.js
+2026-04-12 14:41:58,491 WARNING django.request log Not Found: /static/rest_framework/js/load-ajax-form.js
+2026-04-12 15:14:05,598 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 15:14:05,599 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 15:14:05,599 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 15:14:05,613 WARNING django.request log Not Found: /static/admin/css/dashboard.css
+2026-04-12 15:14:05,613 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 15:14:05,613 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 15:14:05,620 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 15:14:08,826 WARNING django.request log Not Found: /static/admin/css/base.css
+2026-04-12 15:14:08,838 WARNING django.request log Not Found: /static/admin/css/dark_mode.css
+2026-04-12 15:14:08,842 WARNING django.request log Not Found: /static/admin/js/theme.js
+2026-04-12 15:14:08,845 WARNING django.request log Not Found: /static/admin/css/nav_sidebar.css
+2026-04-12 15:14:08,846 WARNING django.request log Not Found: /static/admin/js/nav_sidebar.js
+2026-04-12 15:14:08,850 WARNING django.request log Not Found: /static/admin/css/changelists.css
+2026-04-12 15:14:08,869 WARNING django.request log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2026-04-12 15:14:08,872 WARNING django.request log Not Found: /static/admin/js/jquery.init.js
+2026-04-12 15:14:08,872 WARNING django.request log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2026-04-12 15:14:08,874 WARNING django.request log Not Found: /static/admin/js/core.js
+2026-04-12 15:14:08,876 WARNING django.request log Not Found: /static/admin/js/actions.js
+2026-04-12 15:14:08,885 WARNING django.request log Not Found: /static/admin/js/urlify.js
+2026-04-12 15:14:08,894 WARNING django.request log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2026-04-12 15:14:08,894 WARNING django.request log Not Found: /static/admin/js/filters.js
+2026-04-12 15:14:08,895 WARNING django.request log Not Found: /static/admin/css/responsive.css
+2026-04-12 15:14:08,895 WARNING django.request log Not Found: /static/admin/js/prepopulate.js
+2026-04-12 15:14:08,902 WARNING django.request log Not Found: /static/admin/img/search.svg
+2026-04-12 15:14:45,983 WARNING django.request log Unauthorized: /api/posts/test-post/comments/
+2026-04-12 15:15:14,196 ERROR users views Error occurred during login for email: user@example.com
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/users/views.py", line 118, in post
+    response = super().post(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/views.py", line 46, in post
+    serializer.is_valid(raise_exception=True)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 225, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/serializers.py", line 447, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 73, in validate
+    data = super().validate(attrs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework_simplejwt/serializers.py", line 57, in validate
+    raise exceptions.AuthenticationFailed(
+rest_framework.exceptions.AuthenticationFailed: No active account found with the given credentials
+2026-04-12 15:15:14,203 WARNING django.request log Unauthorized: /api/auth/token/
+2026-04-12 15:15:35,923 ERROR django.request log Internal Server Error: /api/posts/test-post/comments/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 122, in comments
+    publist_comment_created(
+    ^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'publist_comment_created' is not defined
+2026-04-12 15:16:34,043 ERROR django.request log Internal Server Error: /api/posts/test-post/comments/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 122, in comments
+    publist_comment_created(
+    ^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'publist_comment_created' is not defined
+2026-04-12 15:17:34,337 ERROR django.request log Internal Server Error: /api/posts/test-post/comments/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 122, in comments
+    publist_comment_created(
+    ^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'publist_comment_created' is not defined
+2026-04-12 15:18:42,596 ERROR django.request log Internal Server Error: /api/posts/test-post/comments/
+Traceback (most recent call last):
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/exception.py", line 42, in inner
+    response = await get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 557, in thread_handler
+    raise exc_info[1]
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/core/handlers/base.py", line 253, in _get_response_async
+    response = await wrapped_callback(
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 506, in __call__
+    ret = await asyncio.shield(exec_coro)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/current_thread_executor.py", line 40, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/asgiref/sync.py", line 561, in thread_handler
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/viewsets.py", line 125, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 515, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 475, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 486, in raise_uncaught_exception
+    raise exc
+  File "/Users/bakhyt17/Documents/adv django/.venv/lib/python3.11/site-packages/rest_framework/views.py", line 512, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/bakhyt17/Documents/adv django/blog_project/apps/blog/views.py", line 122, in comments
+    publish_comment_created(
+    ^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'publist_comment_created' is not defined
+2026-04-12 15:20:32,852 WARNING django.request log Unauthorized: /api/posts/test-post/comments/

@@ -17,10 +17,12 @@ from .constants import (
 from .models import Comment, Post, PostStatus
 from .pagination import DefaultPagination
 from .permissions import IsOwnerOrReadOnly
-from .redis_pubsub import publist_comment_created
 from .serializers import CommentSerializer, PostSerializer
+from .redis_pubsub import publish_comment_created, publish_post_published
 
 from apps.users.constants import SUPPORTED_LANGUAGE_CODES
+from apps.notifications.tasks import process_new_comment
+from apps.blog.tasks import invalidate_posts_cache
 
 import logging
 
@@ -47,7 +49,7 @@ class PostViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer: PostSerializer) -> None:
         logger.info("Post create attempt by user: %s", self.request.user.id)
         post = serializer.save(author=self.request.user)
-        self._invalidate_posts_list_cache()
+        invalidate_posts_cache.delay()
         logger.info(
             "Post created successfully: id=%s, slug=%s, author_id=%s",
             post.id,
@@ -56,16 +58,12 @@ class PostViewSet(viewsets.ModelViewSet):
         )
 
     def perform_update(self, serializer: PostSerializer) -> None:
-        post = self.get_object()
-        logger.info(
-            "Post update attempt: id=%s slug=%s by user: %s",
-            post.id,
-            post.slug,
-            self.request.user.id,
-        )
-        serializer.save()
-        self._invalidate_posts_list_cache()
-        logger.info("Post updated successfully: id=%s slug=%s", post.id, post.slug)
+        old_status = self.get_object().status
+        post = serializer.save()
+        invalidate_posts_cache.delay()
+        if old_status != PostStatus.PUBLISHED and post.status == PostStatus.PUBLISHED:
+            publish_post_published(post)
+        logger.info("Post updated: id=%s slug=%s", post.id, post.slug)
 
     def perform_destroy(self, instance: Post) -> None:
         logger.info(
@@ -75,7 +73,7 @@ class PostViewSet(viewsets.ModelViewSet):
             self.request.user.id,
         )
         instance.delete()
-        self._invalidate_posts_list_cache()
+        invalidate_posts_cache.delay()
         logger.info(
             "Post deleted successfully: id=%s slug=%s", instance.id, instance.slug
         )
@@ -121,7 +119,7 @@ class PostViewSet(viewsets.ModelViewSet):
             )
             raise
 
-        publist_comment_created(
+        publish_comment_created(
             {
                 "event": "comment_created",
                 "comment_id": comment.id,
@@ -132,6 +130,11 @@ class PostViewSet(viewsets.ModelViewSet):
                 "body": comment.body,
             }
         )
+
+        process_new_comment.delay(comment.id)
+
+        logger.info("process_new_comment task dispatched: comment_id=%s", comment.id)
+
         logger.info(
             "Published comment_created event to redis: comment_id=%s", comment.id
         )

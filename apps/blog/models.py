@@ -3,10 +3,10 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-# Create your models here.
 class PostStatus(models.TextChoices):
     DRAFT = "draft", "Draft"
     PUBLISHED = "published", "Published"
+    SCHEDULED = "scheduled", "Scheduled"
 
 
 class Category(models.Model):
@@ -53,6 +53,12 @@ class Post(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    publish_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name=_("publish at"),
+        help_text=_("Set with status=scheduled to auto-publish at this time."),
+    )
 
     def __str__(self) -> str:
         return self.title

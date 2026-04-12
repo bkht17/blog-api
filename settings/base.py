@@ -1,6 +1,7 @@
+import os
 from pathlib import Path
 
-from .conf import REDIS_URL, SECRET_KEY, DEBUG
+from .conf import REDIS_URL, SECRET_KEY, DEBUG, CELERY_BROKER_URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
@@ -23,6 +24,8 @@ INSTALLED_APPS = [
     "apps.blog",
     "apps.core",
     "drf_spectacular",
+    "channels",
+    "apps.notifications",
 ]
 
 MIDDLEWARE = [
@@ -105,8 +108,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Blog API",
     "DESCRIPTION": "Homework 2 Blog API",
     "VERSION": "2.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,  # Recommended for production
-    # Other settings can be added here
+    "SERVE_INCLUDE_SCHEMA": False, 
 }
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
@@ -190,8 +192,31 @@ TIME_ZONE = "UTC"
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@blog.com"
+
+ASGI_APPLICATION = 'settings.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [REDIS_URL],
+        },
+    },
+}
+
+CELERY_BROKER_URL = CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ("json",)
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"
+CELERY_BEAT_SCHEDULE_FILENAME = os.environ.get(
+    "CELERY_BEAT_SCHEDULE_FILENAME",
+    str(BASE_DIR / "celerybeat-schedule"),
+)

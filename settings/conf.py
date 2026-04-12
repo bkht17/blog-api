@@ -1,11 +1,12 @@
 from decouple import config
 
-ENV_ID = config("BLOG_ENV_ID", default="local")
-SECRET_KEY = config("BLOG_SECRET_KEY", default="your-secret-key")
+SECRET_KEY = config("BLOG_SECRET_KEY")
 DEBUG = config("BLOG_DEBUG", default=True, cast=bool)
-ALLOWED_HOSTS = config(
-    "BLOG_ALLOWED_HOSTS",
-    default="localhost,127.0.1",
-    cast=lambda v: [s.strip() for s in v.split(",")],
+REDIS_URL = config("BLOG_REDIS_URL", default="redis://localhost:6379/0")
+
+CELERY_BROKER_URL = config(
+    "BLOG_CELERY_BROKER_URL", default="redis://localhost:6379/1"
 )
-REDIS_URL = config("BLOG_REDIS_URL", default="redis://127.0.0.1:6379/1")
+FLOWER_USER = config("BLOG_FLOWER_USER", default="admin")
+FLOWER_PASSWORD = config("BLOG_FLOWER_PASSWORD", default="changeme")
+SEED_DB = config("BLOG_SEED_DB", default=False, cast=bool)

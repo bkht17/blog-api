@@ -1,12 +1,91 @@
+x-app-redis-env: &app-redis-env
+  BLOG_REDIS_URL: redis://redis:6379/0
+  BLOG_CELERY_BROKER_URL: redis://redis:6379/1
+
 services:
   redis:
     image: redis:7-alpine
-    container_name: blog_redis
     ports:
       - "6379:6379"
+
+  web:
+    build: .
+    command: daphne -b 0.0.0.0 -p 8000 settings.asgi:application
+    ports:
+      - "8000:8000"
+    environment:
+      <<: *app-redis-env
+    env_file:
+      - settings/.env
     volumes:
-      - redis_data:/data
-    command: ["redis-server", "--appendonly", "yes"]
+      - sqlite_data:/app
+    depends_on:
+      - redis
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import socket; s=socket.socket(); s.settimeout(2); s.connect(('127.0.0.1',8000))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 120s
+
+  celery_worker:
+    build: .
+    command: celery -A settings worker -l info
+    environment:
+      <<: *app-redis-env
+      BLOG_SKIP_DB_SETUP: "1"
+    env_file:
+      - settings/.env
+    volumes:
+      - sqlite_data:/app
+    depends_on:
+      redis:
+        condition: service_started
+      web:
+        condition: service_healthy
+
+  celery_beat:
+    build: .
+    command: celery -A settings beat -l info
+    environment:
+      <<: *app-redis-env
+      BLOG_SKIP_DB_SETUP: "1"
+      CELERY_BEAT_SCHEDULE_FILENAME: /tmp/celerybeat-schedule
+    env_file:
+      - settings/.env
+    volumes:
+      - sqlite_data:/app
+    depends_on:
+      redis:
+        condition: service_started
+      web:
+        condition: service_healthy
+
+  flower:
+    build: .
+    command: >
+      sh -c "celery -A settings flower
+      --basic-auth=$$BLOG_FLOWER_USER:$$BLOG_FLOWER_PASSWORD"
+    ports:
+      - "5555:5555"
+    environment:
+      <<: *app-redis-env
+      BLOG_SKIP_DB_SETUP: "1"
+    env_file:
+      - settings/.env
+    volumes:
+      - sqlite_data:/app
+    depends_on:
+      redis:
+        condition: service_started
+      web:
+        condition: service_healthy
 
 volumes:
-  redis_data:
+  sqlite_data:
