@@ -9,3 +9,7 @@ ALLOWED_HOSTS = config(
     cast=lambda v: [s.strip() for s in v.split(",")],
 )
 REDIS_URL = config("BLOG_REDIS_URL", default="redis://127.0.0.1:6379/1")
+
+CELERY_BROKER_URL = config("BLOG_CELERY_BROKER_URL", default=REDIS_URL)
+FLOWER_USER = config("BLOG_FLOWER_USER", default="admin")
+FLOWER_PASSWORD = config("BLOG_FLOWER_PASSWORD", default="adminpassword")

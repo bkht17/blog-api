@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     "apps.blog",
     "apps.core",
     "drf_spectacular",
+    "channels",
+    "apps.notifications",
 ]
 
 MIDDLEWARE = [
@@ -195,3 +197,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 DEFAULT_FROM_EMAIL = "noreply@blog.com"
+
+ASGI_APPLICATION = 'settings.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [REDIS_URL],
+        },
+    },
+}
