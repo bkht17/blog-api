@@ -59,7 +59,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
     def perform_update(self, serializer: PostSerializer) -> None:
         old_status = self.get_object().status
-        post = serializer.save()  
+        post = serializer.save()
         invalidate_posts_cache.delay()
         if old_status != PostStatus.PUBLISHED and post.status == PostStatus.PUBLISHED:
             publish_post_published(post)
@@ -130,11 +130,11 @@ class PostViewSet(viewsets.ModelViewSet):
                 "body": comment.body,
             }
         )
-        
+
         process_new_comment.delay(comment.id)
-        
+
         logger.info("process_new_comment task dispatched: comment_id=%s", comment.id)
-        
+
         logger.info(
             "Published comment_created event to redis: comment_id=%s", comment.id
         )

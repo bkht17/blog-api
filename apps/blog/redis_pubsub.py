@@ -14,16 +14,18 @@ COMMENTS_CHANNEL = "comments"
 def publish_post_published(post: Any) -> None:
     try:
         r = redis.from_url(settings.REDIS_URL)
-        payload = json.dumps({
-            "post_id": post.id,
-            "title": post.title,
-            "slug": post.slug,
-            "author": {
-                "id": post.author.id,
-                "email": post.author.email,
-            },
-            "published_at": post.updated_at.isoformat(),
-        })
+        payload = json.dumps(
+            {
+                "post_id": post.id,
+                "title": post.title,
+                "slug": post.slug,
+                "author": {
+                    "id": post.author.id,
+                    "email": post.author.email,
+                },
+                "published_at": post.updated_at.isoformat(),
+            }
+        )
         r.publish(SSE_CHANNEL, payload)
         logger.info("SSE event published for post_id=%s", post.id)
     except Exception:

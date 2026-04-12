@@ -6,7 +6,8 @@ from django.utils.translation import gettext_lazy as _
 class PostStatus(models.TextChoices):
     DRAFT = "draft", "Draft"
     PUBLISHED = "published", "Published"
-    SCHEDULED = "scheduled", "Scheduled"  
+    SCHEDULED = "scheduled", "Scheduled"
+
 
 class Category(models.Model):
     name_en = models.CharField(

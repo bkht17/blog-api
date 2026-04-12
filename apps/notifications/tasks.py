@@ -22,14 +22,14 @@ def process_new_comment(self: Any, comment_id: int) -> None:
     from apps.notifications.models import Notification
 
     try:
-        comment = Comment.objects.select_related(
-            "author", "post", "post__author"
-        ).get(id=comment_id)
+        comment = Comment.objects.select_related("author", "post", "post__author").get(
+            id=comment_id
+        )
     except Comment.DoesNotExist:
         logger.warning("process_new_comment: comment_id=%s not found", comment_id)
         return
 
-    # Notification 
+    # Notification
     if comment.author_id != comment.post.author_id:
         Notification.objects.create(
             recipient=comment.post.author,
@@ -46,7 +46,7 @@ def process_new_comment(self: Any, comment_id: int) -> None:
     async_to_sync(channel_layer.group_send)(
         f"post_{comment.post.slug}_comments",
         {
-            "type": "comment_created",  
+            "type": "comment_created",
             "data": {
                 "comment_id": comment.id,
                 "author": {

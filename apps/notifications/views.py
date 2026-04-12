@@ -23,6 +23,7 @@ logger = logging.getLogger("notifications")
 
 SSE_CHANNEL = "post_published"
 
+
 @extend_schema(
     summary="Live post publication stream (SSE)",
     description=(
@@ -61,9 +62,7 @@ async def post_stream_view(request: Any) -> StreamingHttpResponse:
             await pubsub.unsubscribe(SSE_CHANNEL)
             await redis_client.aclose()
 
-    response = StreamingHttpResponse(
-        event_stream(), content_type="text/event-stream"
-    )
+    response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
     response["Cache-Control"] = "no-cache"
     response["X-Accel-Buffering"] = "no"
     return response
@@ -71,9 +70,9 @@ async def post_stream_view(request: Any) -> StreamingHttpResponse:
 
 class NotificationViewSet(viewsets.GenericViewSet):
     """
-    list  — GET  /api/notifications/        
-    count — GET  /api/notifications/count/  
-    read  — POST /api/notifications/read/   
+    list  — GET  /api/notifications/
+    count — GET  /api/notifications/count/
+    read  — POST /api/notifications/read/
     """
 
     serializer_class = NotificationSerializer
