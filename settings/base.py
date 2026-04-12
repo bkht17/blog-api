@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from .conf import REDIS_URL, SECRET_KEY, DEBUG
+from .conf import REDIS_URL, SECRET_KEY, DEBUG, CELERY_BROKER_URL
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 LOG_DIR = BASE_DIR / "logs"
@@ -208,3 +208,10 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+CELERY_BROKER_URL = CELERY_BROKER_URL
+CELERY_RESULT_BACKEND = CELERY_BROKER_URL
+CELERY_ACCEPT_CONTENT = ("json",)
+CELERY_TASK_SERIALIZER = "json"
+CELERY_RESULT_SERIALIZER = "json"
+CELERY_TIMEZONE = "UTC"

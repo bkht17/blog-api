@@ -20,7 +20,7 @@ from .serializers import (
     UserLanguageSerializer,
     UserTimezoneSerializer,
 )
-from .emails import send_welcome_email
+from apps.users.tasks import send_welcome_email as send_welcome_email_task
 
 import logging
 
@@ -86,7 +86,7 @@ class RegisterViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         try:
             user = serializer.save()
-            send_welcome_email(user)
+            send_welcome_email_task.delay(user.id)
         except Exception:
             logger.exception(
                 "Error occurred during registration for email: %s",

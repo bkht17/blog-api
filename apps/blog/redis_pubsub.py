@@ -1,23 +1,40 @@
 import json
+import logging
 from typing import Any, Mapping
-from urllib.parse import urlparse
 
 import redis
 from django.conf import settings
 
+logger = logging.getLogger("blog")
 
-def _redis_client() -> redis.Redis:
-    url = urlparse(settings.REDIS_URL)
-    db = int((url.path or "0").lstrip("/"))
-    return redis.Redis(
-        host=url.hostname or "127.0.0.1",
-        port=url.port or 6379,
-        db=db,
-        password=url.password,
-        decode_responses=True,
-    )
+SSE_CHANNEL = "post_published"
+COMMENTS_CHANNEL = "comments"
 
 
-def publist_comment_created(payload: Mapping[str, Any]) -> None:
-    client = _redis_client()
-    client.publish("comments", json.dumps(dict(payload)))
+def publish_post_published(post: Any) -> None:
+    try:
+        r = redis.from_url(settings.REDIS_URL)
+        payload = json.dumps({
+            "post_id": post.id,
+            "title": post.title,
+            "slug": post.slug,
+            "author": {
+                "id": post.author.id,
+                "email": post.author.email,
+            },
+            "published_at": post.updated_at.isoformat(),
+        })
+        r.publish(SSE_CHANNEL, payload)
+        logger.info("SSE event published for post_id=%s", post.id)
+    except Exception:
+        logger.exception("Failed to publish SSE event for post_id=%s", post.id)
+
+
+def publish_comment_created(payload: Mapping[str, Any]) -> None:
+    """Publish to Redis pub/sub (channel matches listen_comments management command)."""
+    try:
+        r = redis.from_url(settings.REDIS_URL)
+        r.publish(COMMENTS_CHANNEL, json.dumps(dict(payload)))
+        logger.debug("Published comment_created to channel=%s", COMMENTS_CHANNEL)
+    except Exception:
+        logger.exception("Failed to publish comment_created event")
