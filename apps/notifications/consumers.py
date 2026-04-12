@@ -13,7 +13,7 @@ class CommentConsumer(AsyncWebsocketConsumer):
     async def connect(self) -> None:
         self.slug = self.scope["url_route"]["kwargs"]["slug"]
         self.group_name = f"post_{self.slug}_comments"
-        
+
         print(f"New WebSocket connection for post: {self.slug}")
 
         print(f"qs raw: {self.scope.get('query_string')}")
@@ -60,4 +60,5 @@ class CommentConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def _post_exists(self, slug: str) -> bool:
         from apps.blog.models import Post
+
         return Post.objects.filter(slug=slug).exists()
