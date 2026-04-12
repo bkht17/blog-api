@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from .conf import REDIS_URL, SECRET_KEY, DEBUG, CELERY_BROKER_URL
@@ -107,8 +108,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Blog API",
     "DESCRIPTION": "Homework 2 Blog API",
     "VERSION": "2.0.0",
-    "SERVE_INCLUDE_SCHEMA": False,  # Recommended for production
-    # Other settings can be added here
+    "SERVE_INCLUDE_SCHEMA": False, 
 }
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
@@ -192,6 +192,7 @@ TIME_ZONE = "UTC"
 USE_TZ = True
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -215,3 +216,7 @@ CELERY_ACCEPT_CONTENT = ("json",)
 CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_TIMEZONE = "UTC"
+CELERY_BEAT_SCHEDULE_FILENAME = os.environ.get(
+    "CELERY_BEAT_SCHEDULE_FILENAME",
+    str(BASE_DIR / "celerybeat-schedule"),
+)
