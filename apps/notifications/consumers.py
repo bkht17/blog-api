@@ -10,28 +10,27 @@ User = get_user_model()
 
 
 class CommentConsumer(AsyncWebsocketConsumer):
+
     async def connect(self) -> None:
         self.slug = self.scope["url_route"]["kwargs"]["slug"]
         self.group_name = f"post_{self.slug}_comments"
 
-        print(f"New WebSocket connection for post: {self.slug}")
+        logger.info("WebSocket connect: slug=%s", self.slug)
 
-        print(f"qs raw: {self.scope.get('query_string')}")
         user = await self._authenticate()
-        print(f"Authenticated user: {user}")
         if user is None:
-            print("Authentication failed, closing connection")
+            logger.warning("WebSocket auth failed: slug=%s", self.slug)
             await self.close(code=4001)
             return
 
         if not await self._post_exists(self.slug):
-            print("Post does not exist, closing connection")
+            logger.warning("WebSocket post not found: slug=%s", self.slug)
             await self.close(code=4004)
             return
 
         await self.channel_layer.group_add(self.group_name, self.channel_name)
         await self.accept()
-        print(f"WebSocket connection accepted for post: {self.slug}")
+        logger.info("WebSocket accepted: slug=%s", self.slug)
 
     async def disconnect(self, close_code: int) -> None:
         if hasattr(self, "group_name"):
