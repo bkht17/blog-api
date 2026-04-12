@@ -1,32 +1,48 @@
-# Python modules
-import logging
-import asyncio
-from redis.asyncio import aioredis
+from typing import Any
 
-# Django modules
-from django.http.response import StreamingHttpResponse
+import redis.asyncio as aioredis
 from django.conf import settings
-
-# Django REST Framework
-from rest_framework import viewsets
-from rest_framework.request import Request as DRFRequest
-from rest_framework.response import Response as DRFResponse
-from rest_framework.status import (
-    HTTP_200_OK,
-)
-from rest_framework.permissions import IsAuthenticated
+from django.db.models import QuerySet
+from django.http.response import StreamingHttpResponse
+from drf_spectacular.utils import OpenApiResponse, extend_schema
+from rest_framework import status, viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.request import Request
+from rest_framework.response import Response
 
-# Project modules
+from apps.blog.pagination import DefaultPagination
+
 from .models import Notification
 from .serializers import NotificationSerializer
+
+import asyncio
+import logging
 
 logger = logging.getLogger("notifications")
 
 SSE_CHANNEL = "post_published"
 
+@extend_schema(
+    summary="Live post publication stream (SSE)",
+    description=(
+        "Server-Sent Events stream. Returns text/event-stream — "
+        "connection stays open, server pushes events when a post is published. "
+        "No authentication required. "
+        "SSE is chosen over WebSocket because data flows only server→client."
+    ),
+    responses={
+        200: OpenApiResponse(
+            description="SSE stream — each event contains post_id, title, slug, author, published_at",
+        )
+    },
+    tags=["Posts"],
+)
+async def post_stream_view(request: Any) -> StreamingHttpResponse:
+    """
+    GET /api/posts/stream/
+    """
 
-async def post_stream_view(request):
     async def event_stream():
         redis_client = await aioredis.from_url(settings.REDIS_URL)
         pubsub = redis_client.pubsub()
@@ -43,61 +59,77 @@ async def post_stream_view(request):
             pass
         finally:
             await pubsub.unsubscribe(SSE_CHANNEL)
-            await redis_client.close()
+            await redis_client.aclose()
 
-        response = StreamingHttpResponse(
-            event_stream(), content_type="text/event-stream"
-        )
-        response["Cache-Control"] = "no-cache"
-        response["X-Accel-Buffering"] = "no"
-        return response
+    response = StreamingHttpResponse(
+        event_stream(), content_type="text/event-stream"
+    )
+    response["Cache-Control"] = "no-cache"
+    response["X-Accel-Buffering"] = "no"
+    return response
 
 
-class NotificationViewSet(viewsets.ViewSet):
-    permission_classes = IsAuthenticated
+class NotificationViewSet(viewsets.GenericViewSet):
+    """
+    list  — GET  /api/notifications/        
+    count — GET  /api/notifications/count/  
+    read  — POST /api/notifications/read/   
+    """
 
-    def get_permissions(self) -> list:
-        return [permission() for permission in self.permission_classes]
+    serializer_class = NotificationSerializer
+    permission_classes = (IsAuthenticated,)
+    pagination_class = DefaultPagination
 
-    def list(self, request: DRFRequest) -> DRFResponse:
-        logger.info("Listing notifications for user: %s", request.user.id)
-        qs = (
-            Notification.objects.filter(recipient=request.user)
+    def get_queryset(self) -> QuerySet[Notification]:
+        return (
+            Notification.objects.filter(recipient=self.request.user)
             .select_related("comment", "comment__post")
             .order_by("-created_at")
         )
 
-        from apps.blog.pagination import DefaultPagination
+    def get_permissions(self) -> list:
+        return [permission() for permission in self.permission_classes]
 
-        paginator = DefaultPagination()
-        page = paginator.paginate_queryset(qs, request)
-        serializer = NotificationSerializer(page, many=True)
-        return paginator.get_paginated_response(serializer.data)
+    @extend_schema(
+        summary="List notifications",
+        responses={200: NotificationSerializer(many=True)},
+        tags=["Notifications"],
+    )
+    def list(self, request: Request) -> Response:
+        logger.info("Notification list requested by user_id=%s", request.user.id)
+        qs = self.get_queryset()
+        page = self.paginate_queryset(qs)
+        serializer = self.get_serializer(page, many=True)
+        return self.get_paginated_response(serializer.data)
 
-    @action(detail=False, methods=["get"], url_path="count")
-    def count(self, request: DRFRequest) -> DRFResponse:
+    @extend_schema(
+        summary="Unread notification count",
+        responses={200: OpenApiResponse(description="Unread count")},
+        tags=["Notifications"],
+    )
+    @action(detail=False, methods=("get",), url_path="count")
+    def count(self, request: Request) -> Response:
         unread_count: int = Notification.objects.filter(
             recipient=request.user, is_read=False
         ).count()
-        logger.info(
-            "Unread notifications count for user %s: %d", request.user.id, unread_count
-        )
-        return DRFResponse({"unread_count": unread_count}, status=HTTP_200_OK)
+        logger.info("Unread count=%s for user_id=%s", unread_count, request.user.id)
+        return Response({"unread_count": unread_count})
 
-    @action(detail=True, methods=["post"], url_path="read")
-    def read(self, request: DRFRequest, pk: int) -> DRFResponse:
-        logger.info(
-            "Marking notification as read: id=%s for user: %s", pk, request.user.id
-        )
+    @extend_schema(
+        summary="Mark all notifications as read",
+        request=None,
+        responses={200: OpenApiResponse(description="Marked read count")},
+        tags=["Notifications"],
+    )
+    @action(detail=False, methods=("post",), url_path="read")
+    def read(self, request: Request) -> Response:
+        logger.info("Mark all notifications read for user_id=%s", request.user.id)
         updated: int = Notification.objects.filter(
-            id=pk, recipient=request.user, is_read=False
+            recipient=request.user, is_read=False
         ).update(is_read=True)
         logger.info(
-            "Notifications marked as read: %d for notification id: %s and user: %s",
+            "Marked %s notifications as read for user_id=%s",
             updated,
-            pk,
             request.user.id,
         )
-        return DRFResponse(
-            {"detail": "Notification marked as read."}, status=HTTP_200_OK
-        )
+        return Response({"marked_read": updated}, status=status.HTTP_200_OK)
