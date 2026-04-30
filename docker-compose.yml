@@ -11,14 +11,16 @@ services:
   web:
     build: .
     command: daphne -b 0.0.0.0 -p 8000 settings.asgi:application
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     environment:
       <<: *app-redis-env
     env_file:
       - settings/.env
     volumes:
       - sqlite_data:/app
+      - static_files:/app/staticfiles
+      - media_files:/app/media
     depends_on:
       - redis
     healthcheck:
@@ -33,6 +35,18 @@ services:
       timeout: 5s
       retries: 20
       start_period: 120s
+
+  nginx:
+    image: nginx:1.27-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - static_files:/var/www/static:ro
+      - media_files:/var/www/media:ro
+    depends_on:
+      web:
+        condition: service_healthy
 
   celery_worker:
     build: .
@@ -89,3 +103,5 @@ services:
 
 volumes:
   sqlite_data:
+  static_files:
+  media_files:
